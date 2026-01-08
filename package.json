@@ -1,0 +1,12 @@
+{
+  "name": "stroop-pwa",
+  "version": "1.0.0",
+  "module": "server.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run server.ts"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  }
+}

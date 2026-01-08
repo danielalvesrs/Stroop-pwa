@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Teste de Stroop</title>
+    <link rel="stylesheet" href="css/config.css">
+    <link rel="stylesheet" href="css/intro.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+    <header></header>
+    <h1>Configurações do Teste de Stroop</h1>
+
+    <main>
+        <div class="config-container">
+            <section class="config-section">
+                <h2>Modo de Aplicação</h2>
+                <div class="mode-selector">
+                    <div class="mode-option">
+                        <input type="radio" id="game-mode" name="app-mode" value="game" checked>
+                        <label for="game-mode">Jogo</label>
+                        <p class="mode-description">Modo de jogo para diversão e treinamento cognitivo.</p>
+                    </div>
+                    <div class="mode-option">
+                        <input type="radio" id="test-mode" name="app-mode" value="test">
+                        <label for="test-mode">Teste</label>
+                        <p class="mode-description">Modo de teste para avaliação psicológica profissional.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="config-section" id="test-config" style="display: none;">
+                <h2>Configurações do Teste</h2>
+
+                <div class="test-type">
+                    <h3>Tipo de Teste</h3>
+                    <select id="test-type-select">
+                        <option value="standard">Padrão (4 níveis)</option>
+                        <option value="short">Curto (2 níveis)</option>
+                        <option value="extended">Estendido (6 níveis)</option>
+                        <option value="clinical">Clínico (Protocolo Específico)</option>
+                    </select>
+                </div>
+
+                <div class="time-settings">
+                    <h3>Configurações de Tempo</h3>
+                    <div class="time-setting">
+                        <label for="level1-time">Tempo Nível 1 (segundos):</label>
+                        <input type="number" id="level1-time" min="10" max="120" value="17">
+                    </div>
+                    <div class="time-setting">
+                        <label for="level2-time">Tempo Nível 2 (segundos):</label>
+                        <input type="number" id="level2-time" min="10" max="120" value="17">
+                    </div>
+                    <div class="time-setting">
+                        <label for="level3-time">Tempo Nível 3 (segundos):</label>
+                        <input type="number" id="level3-time" min="10" max="120" value="17">
+                    </div>
+                    <div class="time-setting">
+                        <label for="level4-time">Tempo Nível 4 (segundos):</label>
+                        <input type="number" id="level4-time" min="10" max="120" value="17">
+                    </div>
+                </div>
+
+                <div class="metrics-settings">
+                    <h3>Métricas de Análise</h3>
+                    <div class="metric-setting">
+                        <input type="checkbox" id="metric-reaction-time" checked>
+                        <label for="metric-reaction-time">Tempo de Reação</label>
+                    </div>
+                    <div class="metric-setting">
+                        <input type="checkbox" id="metric-error-rate" checked>
+                        <label for="metric-error-rate">Taxa de Erro</label>
+                    </div>
+                    <div class="metric-setting">
+                        <input type="checkbox" id="metric-interference" checked>
+                        <label for="metric-interference">Índice de Interferência</label>
+                    </div>
+                    <div class="metric-setting">
+                        <input type="checkbox" id="metric-learning-curve">
+                        <label for="metric-learning-curve">Curva de Aprendizado</label>
+                    </div>
+                    <div class="metric-setting">
+                        <input type="checkbox" id="metric-fatigue">
+                        <label for="metric-fatigue">Índice de Fadiga</label>
+                    </div>
+                </div>
+            </section>
+
+            <section class="config-section" id="game-config">
+                <h2>Configurações do Jogo</h2>
+                <div class="difficulty-setting">
+                    <h3>Dificuldade</h3>
+                    <select id="difficulty-select">
+                        <option value="easy">Fácil</option>
+                        <option value="medium" selected>Médio</option>
+                        <option value="hard">Difícil</option>
+                        <option value="expert">Especialista</option>
+                    </select>
+                </div>
+                <div class="sound-setting">
+                    <h3>Sons</h3>
+                    <div class="setting-option">
+                        <input type="checkbox" id="sound-enabled" checked>
+                        <label for="sound-enabled">Habilitar Sons</label>
+                    </div>
+                </div>
+            </section>
+
+            <section class="config-section" id="version-info">
+                <h2>Informações da Versão</h2>
+                <div class="version-info">
+                    <p id="current-version">Versão atual: Carregando...</p>
+                    <p id="last-update">Última atualização: Carregando...</p>
+                </div>
+
+                <div class="version-history">
+                    <h3>Histórico de Versões</h3>
+                    <div id="version-history-list">
+                        <p>Carregando histórico...</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="buttons-container">
+                <button id="save-config" class="primary-button">Salvar Configurações</button>
+                <a href="index.html" class="secondary-button">Voltar</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(() => console.log('Service Worker Registrado!'))
+                .catch((err) => console.log('Erro ao registrar Service Worker:', err));
+        }
+    </script>
+</body>
+
+</html>

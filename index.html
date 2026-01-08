@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Para se divertir enquanto expande sua habilidade de percepção." />
+
+  <link rel="stylesheet" href="css/intro.css" />
+  <title>Jogue com o Teste de Stroop</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+  <header></header>
+  <h1>Teste de Stroop</h1>
+  <main>
+    <section>
+      <p class="description">
+        &emsp;&emsp; O famoso "Efeito Stroop" recebeu o nome de J. Ridley
+        Stroop, que descobriu esse estranho fenômeno na década de 1930. O
+        teste consiste em nomear as cores das palavras, NÃO ler as palavras...
+        em vez disso, dizer a cor das palavras. Por exemplo, se a palavra
+        "AZUL" estiver impressa em vermelho, você deve dizer "VERMELHO". e
+        isso não é tão fácil quanto você pode imaginar!
+      </p>
+    </section>
+    <section>
+      <p class="psyco">
+        &emsp;&emsp; Em psicologia, o efeito Stroop (efeito Jaensch) é uma
+        demonstração de interferência no tempo de reação de uma tarefa. Por
+        exemplo, quando uma palavra como azul, verde, vermelho, etc, é
+        impressa numa cor que difere da cor expressa pelo significado
+        semântico (exemplo: a palavra vermelho impressa com tinta azul),
+        ocorre um atraso no processamento da cor da palavra, causando tempos
+        de reacção mais lentos e um aumento de erros. O efeito leva o nome do
+        seu descobridor, John Ridley Stroop, e foi originalmente difundido no
+        artigo "Studies of interference in serial verbal reactions" publicado
+        na revista Journal of Experimental Psychology em 1935.<br />
+        <a href="https://pt.wikipedia.org/wiki/Efeito_Stroop" target="_blank">( Fonte wikipedia )</a>
+      </p>
+    </section>
+    <hr class="separator" />
+
+    <div class="gamePlay">
+      <h2>Jogo Teste de Stroop (Com requintes de crueldade... )</h2>
+      &emsp;&emsp; Este jogo aplica os conceitos deste famoso teste, treinando
+      sua atenção e habilidade de diminuir a interferência no tempo de reação.
+      Mas além da tarefa de clicar nas palavras que descrevem suas cores,
+      neste jogo são incluídas figuras geométricas também com cores e formas
+      que diferem de suas descrições, e é solicitado que o jogador clique na
+      figura correta, o que aumenta a dificuldade, pois a solicitação também
+      contém a troca das formas e cores. Não há punição por erro, a não ser o
+      fato de deixar de somar pontos. A pontuação a ser somada ao seu score é
+      iniciada em 100 e irá diminuir a cada segundo decorrido. Respostas
+      corretas recebem uma moldura verde e a pontuação corrente é somada, do
+      contrário, moldura vermelha sem pontuação.
+    </div>
+    <div class="button-container">
+      <a href="stroop.html"><button type="submit" class="play-button">Bora jogar!</button></a>
+      <a href="config.html"><button type="submit" class="config-button">Configurações</button></a>
+    </div>
+  </main>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('Service Worker Registrado!'))
+        .catch((err) => console.log('Erro ao registrar Service Worker:', err));
+    }
+  </script>
+</body>
+
+</html>

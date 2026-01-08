@@ -1,0 +1,588 @@
+/* Estilo do Corpo */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+
+.status-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f9f9f9; /* Cor de fundo leve */
+    padding: 15px;
+    border: 2px solid #ddd; /* Borda arredondada leve */
+    border-radius: 10px;
+}
+
+.status-box span {
+    display: block;
+    font-size: 24px; /* Tamanho de fonte para valores */
+    font-weight: bold;
+    margin-bottom: 5px; /* Espaço entre o valor e o rótulo */
+}
+
+.status-box label {
+    font-size: 18px; /* Tamanho de fonte para os rótulos */
+    color: #333; /* Cor do texto do rótulo */
+}
+/*
+ * Estilos para as formas geométricas
+ */
+ /* Adicionando uma margem inferior ao título gradiente para espaço das figuras */
+.gradient {
+    font-size: 5em;
+    font-weight: bold;
+    padding: 1px;
+    border-radius: 10px;
+    background-color: #fff;
+    border: 2px solid #000;
+    width: 83%;
+    margin: 5px auto 20px; /* Adiciona uma margem inferior para espaço adicional */
+    color: rgb(54, 13, 13);
+    text-shadow: 3px 3px rgb(172, 182, 172);
+    background-image: linear-gradient(to right, red, yellow, green, blue);
+}
+
+.stroop-container {
+    display: inline-block;
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
+}
+
+.stroop-shape {
+    width: 140px; /* Aumentado em 40% a partir de 100px */
+    height: 140px; /* Aumentado em 40% a partir de 100px */
+    border: 1px solid black;
+    background-color: white; /* Fundo branco por padrão */
+    margin: 0 auto;
+    margin-top: 5px;
+    position: relative;
+}
+
+
+
+.shape-label {
+    display: block;
+    font-size: 18px;
+    color: black;
+    background-color: white; /* Fundo branco sólido para visibilidade */
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 20px; /* Espaço entre o texto e a figura */
+    margin-bottom: 1px; /* Espaço entre o texto e a figura */
+    box-sizing: border-box;
+    position: relative;
+    top: -30px; /* Posição acima da figura */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.container {
+    width: 95%;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#status-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; /* Espaço entre os elementos */
+    margin-top: 20px; /* Espaçamento superior */
+}
+
+.status-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+}
+
+.mode-indicator {
+    background-color: #2196F3;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.mode-indicator.test-mode {
+    background-color: #FF9800;
+}
+
+#button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#button-container button {
+    margin: 5px 10px;
+}
+
+#shape-button-container {
+    border: 3px solid #000;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+
+
+.stroop-text {
+    font-size: 8em;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    border: 5px solid #000;
+    width: 80%;
+    margin: 5px auto;
+    transition: transform 0.7s;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.correct {
+    animation: correct 1s ease-out;
+}
+
+@keyframes correct {
+    0% {
+        transform: scale(0.1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.shake {
+    animation: shake 1s ease-in-out;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+    10% {
+        transform: translateX(-20px);
+    }
+    20% {
+        transform: translateX(20px);
+    }
+    30% {
+        transform: translateX(-20px);
+    }
+    40% {
+        transform: translateX(20px);
+    }
+    50% {
+        transform: translateX(-20px);
+    }
+    60% {
+        transform: translateX(20px);
+    }
+    70% {
+        transform: translateX(-20px);
+    }
+    80% {
+        transform: translateX(20px);
+    }
+    90% {
+        transform: translateX(-20px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.button-common {
+    border: none;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    padding: 15px 32px;
+    border-radius: 12px;
+    font-size: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#new-game-button, #next-level-button {
+    background-color: #4CAF50;
+}
+
+#new-game-button:hover, #next-level-button:hover {
+    background-color: #3e8e41;
+}
+
+@media only screen and (max-width: 768px) {
+    .gradient {
+        font-size: 2em;
+        width: 90%;
+    }
+
+    .stroop-text {
+        font-size: 4em;
+    }
+
+    .results-container {
+        width: 95%;
+        padding: 15px;
+        max-height: 85vh;
+    }
+
+    .results-container h2 {
+        font-size: 1.5em;
+    }
+
+    .results-container h3 {
+        font-size: 1.2em;
+    }
+
+    .results-container p {
+        font-size: 0.9em;
+    }
+
+    .diagnostico-resultado {
+        grid-template-columns: 1fr;
+    }
+
+    .results-container button {
+        padding: 10px 15px;
+        font-size: 0.9em;
+        min-width: 120px;
+    }
+    
+    #status-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .status-box {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .button-common {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+    
+    .stroop-shape {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .gradient {
+        font-size: 1.5em;
+        width: 95%;
+    }
+
+    .stroop-text {
+        font-size: 2.5em;
+        padding: 10px;
+    }
+    
+    .button-container {
+        width: 95%;
+    }
+    
+    .shape-button-container {
+        width: 95%;
+    }
+    
+    .shape-button {
+        width: calc(50% - 10px);
+        margin: 5px;
+        font-size: 1.2em;
+    }
+}
+
+.button-container {
+    width: 86%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.shape-button-container {
+    width: 86%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.shape-button {
+    width: calc(33.33% - 10px);
+    height: 40px;
+    border: 3px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #000;
+    background-color: #fff;
+    margin: 10px;
+    flex: 1;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+.button {
+    width: calc(33.33% - 10px);
+    height: 40px;
+    border: 3px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #000;
+    background-color: #fff;
+    margin: 10px;
+    flex: 1;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.button:hover {
+    opacity: 0.8;
+}
+
+.shape-button:hover {
+    opacity: 0.8;
+}
+
+/* Estilo para a caixa de instrução do nível 4 */
+.instruction-box {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin: 10px auto;
+    max-width: 90%;
+    text-align: center;
+    color: #856404;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 193, 7, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
+    }
+}
+
+/* Adicione ao arquivo stroop.css */
+
+#final-results {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.results-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 90%;
+    width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.results-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.results-container p {
+    margin: 8px 0;
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+.results-container h3 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    color: #2196F3;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.results-container .buttons-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.results-container button {
+    margin: 5px;
+    padding: 12px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    min-width: 150px;
+}
+
+.results-container button:hover {
+    background-color: #45a049;
+}
+
+.results-container .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    padding: 0;
+    min-width: auto;
+}
+
+.results-container .close-button:hover {
+    background-color: #d32f2f;
+}
+
+.shape-display {
+    width: 150px;
+    height: 150px;
+    margin: 20px auto;
+    border: 3px solid black; /* Adicionado borda para visualização */
+}
+
+.square { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); }
+.circle { border-radius: 50%; }
+.triangle { clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+
+/* Estilos para o diagnóstico */
+.diagnostico-container {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+    text-align: left;
+}
+
+.diagnostico-container h3 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+
+.diagnostico-descricao {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 12px;
+    font-size: 0.85em;
+    text-align: center;
+}
+
+.diagnostico-resultado {
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 5px;
+}
+
+.diagnostico-resultado p {
+    margin: 6px 0;
+    border: none;
+    padding: 0;
+    font-size: 0.9em;
+    width: 100%;
+    text-align: left;
+}
+
+.diagnostico-interpretacao {
+    background-color: #e8f4fd;
+    border-left: 4px solid #2196F3;
+    padding: 10px;
+    margin: 12px 0;
+}
+
+.diagnostico-interpretacao h4 {
+    color: #2196F3;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+.diagnostico-interpretacao p {
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9em;
+    font-weight: normal;
+    width: 100%;
+    line-height: 1.5;
+}
+
+.diagnostico-aviso {
+    font-size: 0.75em;
+    color: #999;
+    font-style: italic;
+    text-align: center;
+    margin-top: 12px;
+    border: none !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
