@@ -1,4 +1,4 @@
-const CACHE_NAME = 'stroop-pwa-v9';
+const CACHE_NAME = 'stroop-pwa-v10';
 const INITIAL_CACHE = [
   './',
   './index.html',
