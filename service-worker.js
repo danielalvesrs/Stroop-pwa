@@ -1,4 +1,4 @@
-const CACHE_NAME = 'stroop-pwa-v4';
+const CACHE_NAME = 'stroop-pwa-v5';
 const INITIAL_CACHE = [
   './',
   './index.html',
@@ -25,6 +25,7 @@ const INITIAL_CACHE = [
 // Instalação do Service Worker
 self.addEventListener('install', (event) => {
   console.log('[Service Worker] Instalando...');
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('[Service Worker] Cacheando arquivos iniciais');
