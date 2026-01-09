@@ -5,21 +5,23 @@ let selectedShapeName = null;
 let selectedShapeColor = null;
 
 function startLevel4() {
-    document.getElementById("button-container").style.display = "none"; // Esconde container de botões de texto
-    document.getElementById("shape-button-container").style.display = "flex"; // Exibe container de botões de forma (antigo)
-    document.getElementById("shape-name-button-container").style.display = "flex"; // Exibe container de botões de nomes de formas (novo)
-    document.getElementById("shape-color-button-container").style.display = "flex"; // Exibe container de botões de cores de formas (novo)
+    showLevelIntro(4, () => {
+        document.getElementById("button-container").style.display = "none"; // Esconde container de botões de texto
+        document.getElementById("shape-button-container").style.display = "flex"; // Exibe container de botões de forma (antigo)
+        document.getElementById("shape-name-button-container").style.display = "flex"; // Exibe container de botões de nomes de formas (novo)
+        document.getElementById("shape-color-button-container").style.display = "flex"; // Exibe container de botões de cores de formas (novo)
 
-    // Exibir a instrução do nível 4
-    const instructionElement = document.getElementById("level4-instruction");
-    if (instructionElement) {
-        instructionElement.style.display = "block";
-    }
+        // Exibir a instrução do nível 4
+        const instructionElement = document.getElementById("level4-instruction");
+        if (instructionElement) {
+            instructionElement.style.display = "block";
+        }
 
-    startCountdown(levelDurations[4] || DEFAULT_LEVEL4_DURATION);
-    generateLevel4Stimulus();
-    generateLevel4NameButtons(); // Nova função para gerar botões de nomes de formas
-    generateLevel4ColorButtons(); // Nova função para gerar botões de cores
+        startCountdown(levelDurations[4] || DEFAULT_LEVEL4_DURATION);
+        generateLevel4Stimulus();
+        generateLevel4NameButtons(); // Nova função para gerar botões de nomes de formas
+        generateLevel4ColorButtons(); // Nova função para gerar botões de cores
+    });
 }
 
 function generateLevel4Stimulus() {
@@ -73,7 +75,7 @@ function generateLevel4NameButtons() {
         const button = document.createElement("button");
         button.className = "button"; // Reutilize a classe 'button' para estilos
         button.textContent = name;
-        button.onclick = function() {
+        button.onclick = function () {
             selectShapeName(name);
         };
         shapeNameButtonContainer.appendChild(button);
@@ -103,7 +105,7 @@ function generateLevel4ColorButtons() {
         button.className = "button"; // Reutilize a classe 'button' para estilos
         button.textContent = color;
         button.style.backgroundColor = colorMap[color]; // Define a cor de fundo do botão
-        button.onclick = function() {
+        button.onclick = function () {
             selectShapeColor(color);
         };
         shapeColorButtonContainer.appendChild(button);

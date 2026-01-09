@@ -1,10 +1,12 @@
 // Usar a duração padrão ou a configurada
 function startLevel3() {
-    document.getElementById("button-container").style.display = "flex"; // or 'block'
-    document.getElementById("shape-button-container").style.display = "none";
-    startCountdown(levelDurations[3] || DEFAULT_LEVEL_DURATION);
-    generateStroopText();
-    generateLevel3Buttons();
+    showLevelIntro(3, () => {
+        document.getElementById("button-container").style.display = "flex"; // or 'block'
+        document.getElementById("shape-button-container").style.display = "none";
+        startCountdown(levelDurations[3] || DEFAULT_LEVEL_DURATION);
+        generateStroopText();
+        generateLevel3Buttons();
+    });
 }
 
 function generateLevel3Buttons() {

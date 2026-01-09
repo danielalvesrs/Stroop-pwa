@@ -25,6 +25,35 @@ let reactionTimes = [];
 let appConfig = {};
 let lastStimulusTime = 0; // Variável para medir o tempo de reação
 
+
+const LEVEL_DESCRIPTIONS = {
+    1: "Neste nível, identifique a **COR** da palavra exibida. Ignore o que está escrito.",
+    2: "As opções de resposta agora são coloridas. Continue focando na **COR** da palavra central.",
+    3: "As opções agora têm fundo colorido. Mantenha o foco na **COR** da palavra central, independente do fundo.",
+    4: "Atenção: A **1ª figura** é crucial!<br><br>1. Memorize a **FORMA** e a **COR** dela.<br>2. Ao clicar no primeiro atributo, a figura ou a cor MUDARÁ.<br>3. **IGNORE** a nova figura e responda o segundo atributo da figura **ANTERIOR**.<br><br>Se errar a primeira, comprometerá as próximas!"
+};
+
+function showLevelIntro(level, onStartCallback) {
+    const modal = document.getElementById("level-intro-modal");
+    const title = document.getElementById("level-title");
+    const description = document.getElementById("level-description");
+    const startButton = document.getElementById("start-level-btn");
+
+    title.textContent = `Nível ${level}`;
+    description.innerHTML = LEVEL_DESCRIPTIONS[level] || "Prepare-se!";
+
+    // Remove previous event listeners
+    const newButton = startButton.cloneNode(true);
+    startButton.parentNode.replaceChild(newButton, startButton);
+
+    newButton.addEventListener("click", () => {
+        modal.style.display = "none";
+        if (onStartCallback) onStartCallback();
+    });
+
+    modal.style.display = "flex";
+}
+
 function startCountdown(duration) {
     if (countdownInterval) clearInterval(countdownInterval);
 
@@ -47,7 +76,7 @@ function startCountdown(duration) {
             // Salva os dados da sessão
             saveSessionData();
 
-            if(currentLevel < 4) {
+            if (currentLevel < 4) {
                 document.getElementById("next-level-button").style.display = "block";
             } else {
                 showFinalResults(); // Nova função para mostrar resultados finais
@@ -183,9 +212,9 @@ function resetGame(level = 1) {
 }
 
 // Definições vazias das funções específicas para evitar erros de referência
-function generateLevel1Buttons() {}
-function generateLevel2Buttons() {}
-function generateLevel3Buttons() {}
+function generateLevel1Buttons() { }
+function generateLevel2Buttons() { }
+function generateLevel3Buttons() { }
 
 // Inicializa o jogo no nível 1 por padrão após carregar a página
 document.addEventListener("DOMContentLoaded", () => {
@@ -194,7 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const tituloVersao = document.querySelector('h3'); // Seleciona o elemento <h3>
     if (tituloVersao) {
-      tituloVersao.textContent = `Stroop (v${versao})`; // Atualiza o texto do <h3>
+        tituloVersao.textContent = `Stroop (v${versao})`; // Atualiza o texto do <h3>
     }
 
     // Verificar se houve atualização ou downgrade
