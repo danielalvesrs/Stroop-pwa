@@ -1,0 +1,33 @@
+# Configuração do Netlify para PWA Stroop
+[build]
+  # Diretório de publicação (arquivos estáticos)
+  publish = "."
+  
+  # Comando de build (se necessário)
+  # command = "npm run build"
+
+# Configurações de headers para PWA
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Cache control para assets
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/service-worker.js"
+  [headers.values]
+    # Service worker não deve ser cacheado pelo navegador
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/manifest.json"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
+# Redirecionar 404s para a página offline (ou index.html)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  conditions = {Role = ["admin"]}
+  force = false

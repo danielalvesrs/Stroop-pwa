@@ -4,8 +4,8 @@ Para converter seu PWA (Web App) em um aplicativo Android real (APK/AAB) e publi
 
 ## Pré-requisitos
 1. **PWA Validado**: Já ajustamos seus ícones e manifesto.
-2. **Hospedagem HTTPS**: Seu site DEVE estar publicado em uma URL pública com HTTPS (ex: Firebase Hosting).
-   - Se ainda não fez o deploy: `firebase deploy`
+2. **Hospedagem HTTPS**: Seu site DEVE estar publicado em uma URL pública com HTTPS (ex: Netlify).
+   - Se ainda não fez o deploy, faça através do Netlify ou git push para deploy automático
 
 ---
 

@@ -1,9 +1,10 @@
-const CACHE_NAME = 'stroop-pwa-v1';
+const CACHE_NAME = 'stroop-pwa-v2';
 const INITIAL_CACHE = [
   './',
   './index.html',
   './stroop.html',
   './config.html',
+  './offline.html',
   './css/intro.css',
   './css/stroop.css',
   './css/config.css',
@@ -64,6 +65,11 @@ self.addEventListener('fetch', (event) => {
         return networkResponse;
       }).catch((err) => {
         console.log('[Service Worker] Erro na requisição:', err);
+        // Se a requisição falhar e for uma navegação HTML, retorna a página offline
+        if (event.request.mode === 'navigate') {
+          return caches.match('./offline.html');
+        }
+        return null;
       });
     })
   );
