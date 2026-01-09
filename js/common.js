@@ -26,21 +26,31 @@ let appConfig = {};
 let lastStimulusTime = 0; // Variável para medir o tempo de reação
 
 
-const LEVEL_DESCRIPTIONS = {
-    1: "Neste nível, identifique a **COR** da palavra exibida. Ignore o que está escrito.",
-    2: "As opções de resposta agora são coloridas. Continue focando na **COR** da palavra central.",
-    3: "As opções agora têm fundo colorido. Mantenha o foco na **COR** da palavra central, independente do fundo.",
-    4: "Atenção: A **1ª figura** é crucial!<br><br>1. Memorize a **FORMA** e a **COR** dela.<br>2. Ao clicar no primeiro atributo, a figura ou a cor MUDARÁ.<br>3. **IGNORE** a nova figura e responda o segundo atributo da figura **ANTERIOR**.<br><br>Se errar a primeira, comprometerá as próximas!"
-};
+const GAME_INSTRUCTIONS_HTML = `
+    <div style="text-align: left; font-size: 1em;">
+        <p style="margin-bottom: 10px;">• <strong>Nível 1:</strong> "Neste nível, identifique a <strong>COR</strong> da palavra exibida. Ignore o que está escrito."</p>
+        <p style="margin-bottom: 10px;">• <strong>Nível 2:</strong> "As opções de resposta agora são coloridas. Continue focando na <strong>COR</strong> da palavra central."</p>
+        <p style="margin-bottom: 10px;">• <strong>Nível 3:</strong> "As opções agora têm fundo colorido. Mantenha o foco na <strong>COR</strong> da palavra central, independente do fundo."</p>
+        <p style="margin-bottom: 10px;">• <strong>Nível 4:</strong> "Atenção: A <strong>1ª figura</strong> é crucial!
+            <br>&emsp;1. Memorize a <strong>FORMA</strong> e a <strong>COR</strong> dela.
+            <br>&emsp;2. Ao clicar no primeiro atributo, a figura ou a cor MUDARÁ.
+            <br>&emsp;3. <strong>IGNORE</strong> a nova figura e responda o segundo atributo da figura <strong>ANTERIOR</strong>."
+        </p>
+    </div>
+`;
 
-function showLevelIntro(level, onStartCallback) {
+function showGameInstructions(onStartCallback) {
     const modal = document.getElementById("level-intro-modal");
+    if (!modal) {
+        if (onStartCallback) onStartCallback();
+        return;
+    }
     const title = document.getElementById("level-title");
     const description = document.getElementById("level-description");
     const startButton = document.getElementById("start-level-btn");
 
-    title.textContent = `Nível ${level}`;
-    description.innerHTML = LEVEL_DESCRIPTIONS[level] || "Prepare-se!";
+    title.textContent = "Instruções dos Níveis";
+    description.innerHTML = GAME_INSTRUCTIONS_HTML;
 
     // Remove previous event listeners
     const newButton = startButton.cloneNode(true);
@@ -218,7 +228,7 @@ function generateLevel3Buttons() { }
 
 // Inicializa o jogo no nível 1 por padrão após carregar a página
 document.addEventListener("DOMContentLoaded", () => {
-    const versao = '5.5.0'; // Defina sua versão atual aqui
+    const versao = '5.5.1'; // Defina sua versão atual aqui
     const versaoArmazenada = localStorage.getItem('versaoStroop');
 
     const tituloVersao = document.querySelector('h3'); // Seleciona o elemento <h3>
