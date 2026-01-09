@@ -1,12 +1,10 @@
 // Usar a duração padrão ou a configurada
 function startLevel2() {
-    showLevelIntro(2, () => {
-        document.getElementById("button-container").style.display = "flex"; // or 'block'
-        document.getElementById("shape-button-container").style.display = "none";
-        startCountdown(levelDurations[2] || DEFAULT_LEVEL_DURATION);
-        generateStroopText();
-        generateLevel2Buttons();
-    });
+    document.getElementById("button-container").style.display = "flex"; // or 'block'
+    document.getElementById("shape-button-container").style.display = "none";
+    startCountdown(levelDurations[2] || DEFAULT_LEVEL_DURATION);
+    generateStroopText();
+    generateLevel2Buttons();
 }
 
 function generateLevel2Buttons() {

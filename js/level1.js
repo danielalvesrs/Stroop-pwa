@@ -1,6 +1,6 @@
 // Usar a duração padrão ou a configurada
 function startLevel1() {
-    showLevelIntro(1, () => {
+    showGameInstructions(() => {
         document.getElementById("button-container").style.display = "flex"; // or 'block'
         document.getElementById("shape-button-container").style.display = "none";
         startCountdown(levelDurations[1] || DEFAULT_LEVEL_DURATION);
