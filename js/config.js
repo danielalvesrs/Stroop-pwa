@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Elementos do DOM
     const gameModeRadio = document.getElementById('game-mode');
     const testModeRadio = document.getElementById('test-mode');
@@ -13,14 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
     loadVersionInfo();
 
     // Event listeners para alternar entre modos
-    gameModeRadio.addEventListener('change', function() {
+    gameModeRadio.addEventListener('change', function () {
         if (this.checked) {
             gameConfigSection.style.display = 'block';
             testConfigSection.style.display = 'none';
         }
     });
 
-    testModeRadio.addEventListener('change', function() {
+    testModeRadio.addEventListener('change', function () {
         if (this.checked) {
             gameConfigSection.style.display = 'none';
             testConfigSection.style.display = 'block';
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     saveConfigButton.addEventListener('click', saveConfig);
 
     // Event listener para o tipo de teste
-    document.getElementById('test-type-select').addEventListener('change', function() {
+    document.getElementById('test-type-select').addEventListener('change', function () {
         updateTestTypeSettings(this.value);
     });
 
@@ -168,19 +168,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Função para atualizar configurações com base no tipo de teste
     function updateTestTypeSettings(testType) {
-        switch(testType) {
+        switch (testType) {
             case 'short':
                 document.getElementById('level1-time').value = 20;
                 document.getElementById('level2-time').value = 20;
                 document.getElementById('level3-time').value = 0;
                 document.getElementById('level4-time').value = 0;
                 break;
-            case 'extended':
-                document.getElementById('level1-time').value = 15;
-                document.getElementById('level2-time').value = 15;
-                document.getElementById('level3-time').value = 15;
-                document.getElementById('level4-time').value = 15;
-                break;
+
             case 'clinical':
                 document.getElementById('level1-time').value = 30;
                 document.getElementById('level2-time').value = 30;
