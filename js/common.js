@@ -87,7 +87,9 @@ function startCountdown(duration) {
             saveSessionData();
 
             if (currentLevel < 4) {
-                document.getElementById("next-level-button").style.display = "block";
+                const nextLevelBtn = document.getElementById("next-level-button");
+                nextLevelBtn.style.display = "block";
+                nextLevelBtn.scrollIntoView({ behavior: 'smooth' });
             } else {
                 showFinalResults(); // Nova função para mostrar resultados finais
             }
@@ -183,6 +185,8 @@ function displayFeedback(type) {
 
 function resetGame(level = 1) {
     currentLevel = level;
+    currentLevel = level;
+    window.scrollTo(0, 0);
     document.getElementById("current-level").textContent = "Nível: " + currentLevel;
     correctCount = 0;
     errorCount = 0;
@@ -228,7 +232,7 @@ function generateLevel3Buttons() { }
 
 // Inicializa o jogo no nível 1 por padrão após carregar a página
 document.addEventListener("DOMContentLoaded", () => {
-    const versao = '5.5.2'; // Defina sua versão atual aqui
+    const versao = '5.5.3'; // Defina sua versão atual aqui
     const versaoArmazenada = localStorage.getItem('versaoStroop');
 
     const tituloVersao = document.querySelector('h3'); // Seleciona o elemento <h3>
