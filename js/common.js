@@ -232,7 +232,7 @@ function generateLevel3Buttons() { }
 
 // Inicializa o jogo no nível 1 por padrão após carregar a página
 document.addEventListener("DOMContentLoaded", () => {
-    const versao = '5.5.3'; // Defina sua versão atual aqui
+    const versao = '5.5.4'; // Defina sua versão atual aqui
     const versaoArmazenada = localStorage.getItem('versaoStroop');
 
     const tituloVersao = document.querySelector('h3'); // Seleciona o elemento <h3>
