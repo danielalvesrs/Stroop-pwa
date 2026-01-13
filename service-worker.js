@@ -1,10 +1,11 @@
-const CACHE_NAME = 'stroop-pwa-v12';
+const CACHE_NAME = 'stroop-pwa-v13'; // Incrementado para forçar atualização
 const INITIAL_CACHE = [
   './',
   './index.html',
   './stroop.html',
   './config.html',
   './offline.html',
+  './privacy.html',
   './css/intro.css',
   './css/stroop.css',
   './css/config.css',
@@ -18,8 +19,14 @@ const INITIAL_CACHE = [
   './error_sound.mp3',
   './success_sound.mp3',
   './manifest.json',
+  './icons/icon-72x72.png',
+  './icons/icon-96x96.png',
+  './icons/icon-128x128.png',
+  './icons/icon-144x144.png',
   './icons/icon-192x192.png',
-  './icons/icon-512x512.png'
+  './icons/icon-384x384.png',
+  './icons/icon-512x512.png',
+  './icons/icon-512x512-maskable.png'
 ];
 
 // Instalação do Service Worker
@@ -52,26 +59,42 @@ self.addEventListener('activate', (event) => {
   return self.clients.claim();
 });
 
-// Interceptação de requisições (Cache First, fallback Network)
+// Interceptação de requisições
 self.addEventListener('fetch', (event) => {
-  // Ignora requisições que não sejam http/https
   if (!event.request.url.startsWith('http')) return;
 
+  // Estratégia Network First para navegação (HTML) para garantir frescor
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => {
+          return caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, networkResponse.clone());
+            return networkResponse;
+          });
+        })
+        .catch(() => {
+          return caches.match(event.request).then((response) => {
+            return response || caches.match('./offline.html');
+          });
+        })
+    );
+    return;
+  }
+
+  // Estratégia Cache First para outros assets
   event.respondWith(
     caches.match(event.request).then((response) => {
-      if (response) {
-        return response; // Retorna do cache
-      }
-      return fetch(event.request).then((networkResponse) => {
-        return networkResponse;
-      }).catch((err) => {
-        console.log('[Service Worker] Erro na requisição:', err);
-        // Se a requisição falhar e for uma navegação HTML, retorna a página offline
-        if (event.request.mode === 'navigate') {
-          return caches.match('./offline.html');
-        }
-        return null;
+      return response || fetch(event.request).then((networkResponse) => {
+        return caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        });
       });
+    }).catch(() => {
+      // Fallback para imagens se necessário, ou apenas falha silenciosa
+      return null;
     })
   );
 });
+

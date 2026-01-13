@@ -176,10 +176,9 @@ function displayFeedback(type) {
     element.classList.add(type === 'success' ? "correct" : "shake");
     setTimeout(() => element.classList.remove(type === 'success' ? "correct" : "shake"), 1500);
 
-    // Verificar se o som está habilitado nas configurações
     if (appConfig.soundEnabled !== false) { // Se não estiver definido ou for true
         const sound = document.getElementById(type === 'success' ? "success-sound" : "error-sound");
-        sound.play();
+        sound.play().catch(e => console.warn("Erro ao reproduzir som:", e));
     }
 }
 
@@ -243,21 +242,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // Verificar se houve atualização ou downgrade
     if (versaoArmazenada) {
         if (versaoArmazenada > versao) {
-            const continuar = confirm(`DOWNGRADE DETECTADO: A versão atual (${versao}) é anterior à versão armazenada (${versaoArmazenada}). Deseja continuar?`);
-            if (continuar) {
-                console.log('Usuário optou por continuar após downgrade.');
-                registrarMudancaVersao(versao, versaoArmazenada, 'downgrade');
-            } else {
-                console.log('Usuário optou por não continuar após downgrade.');
-                window.location.href = 'index.html';
-                return;
-            }
+            console.log(`DOWNGRADE DETECTADO: Versão atual (${versao}) < armazenada (${versaoArmazenada}).`);
+            registrarMudancaVersao(versao, versaoArmazenada, 'downgrade');
         } else if (versaoArmazenada < versao) {
-            alert(`UPGRADE DETECTADO: O aplicativo foi atualizado da versão ${versaoArmazenada} para a versão ${versao}.`);
+            console.log(`UPGRADE DETECTADO: Atualizado de ${versaoArmazenada} para ${versao}.`);
             registrarMudancaVersao(versao, versaoArmazenada, 'upgrade');
         }
     } else {
         // Primeira instalação
+        console.log(`Primeira instalação da versão ${versao}.`);
         registrarMudancaVersao(versao, null, 'instalação');
     }
 

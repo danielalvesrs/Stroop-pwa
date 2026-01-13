@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('stroopConfig', JSON.stringify(config));
 
         // Feedback para o usuário
-        alert('Configurações salvas com sucesso!');
+        console.log('Configurações salvas com sucesso!');
     }
 
     // Função para atualizar configurações com base no tipo de teste
