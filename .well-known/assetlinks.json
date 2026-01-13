@@ -1,13 +1,15 @@
 [
     {
         "relation": [
-            "delegate_permission/common.handle_all_urls"
+            "delegate_permission/common.handle_all_urls",
+            "delegate_permission/common.get_login_creds"
         ],
         "target": {
             "namespace": "android_app",
             "package_name": "app.netlify.stroopapp.twa",
             "sha256_cert_fingerprints": [
-                "67:50:CF:1A:7F:66:AC:86:F0:2E:FF:67:37:F7:78:A7:33:3D:B7:58:65:93:FF:7E:E1:A2:79:29:68:40:29:C4"
+                "67:50:CF:1A:7F:66:AC:86:F0:2E:FF:67:37:F7:78:A7:33:3D:B7:58:65:93:FF:7E:E1:A2:79:29:68:40:29:C4",
+                "BE:BD:9B:D2:AA:F1:42:11:B8:BA:93:70:2B:60:05:6C:9A:A5:AD:3B:9B:66:3B:B1:D1:1E:CF:B2:F4:98:4E:06"
             ]
         }
     }
