@@ -243,3 +243,11 @@ const i18n = new TranslationManager();
 
 // Atalho global para usar t('key')
 window.t = (key) => i18n.t(key);
+
+// Garantir que as traduções sejam aplicadas quando o DOM estiver pronto
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => i18n.applyTranslations());
+} else {
+    // Se o DOM já estiver carregado (caso o script seja movido para o final do body algum dia)
+    i18n.applyTranslations();
+}
