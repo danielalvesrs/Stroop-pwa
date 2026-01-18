@@ -19,9 +19,7 @@ function generateLevel2Buttons() {
             buttonColor = colors[Math.floor(Math.random() * colors.length)];
         } while (buttons.includes(buttonColor));
 
-        const buttonKey = buttonColor;
-        button.textContent = window.t(buttonKey);
-        button.dataset.color = buttonKey;
+        button.textContent = buttonColor;
         button.style.color = colorMap[colors[Math.floor(Math.random() * colors.length)]]; // Específico para o Nível 2
         buttons.push(buttonColor);
         buttonContainer.appendChild(button);

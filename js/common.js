@@ -1,11 +1,11 @@
-const colors = ["red", "green", "blue", "yellow", "orange", "purple"];
+const colors = ["Vermelho", "Verde", "Azul", "Amarelo", "Laranja", "Púrpura"];
 const colorMap = {
-    "red": "var(--color-red, red)",
-    "green": "var(--color-green, green)",
-    "blue": "var(--color-blue, blue)",
-    "yellow": "var(--color-yellow, yellow)",
-    "orange": "var(--color-orange, orange)",
-    "purple": "var(--color-purple, purple)"
+    "Vermelho": "red",
+    "Verde": "green",
+    "Azul": "blue",
+    "Amarelo": "yellow",
+    "Laranja": "orange",
+    "Púrpura": "purple"
 };
 
 // Configurações padrão
@@ -28,10 +28,14 @@ let lastStimulusTime = 0; // Variável para medir o tempo de reação
 
 const GAME_INSTRUCTIONS_HTML = `
     <div style="text-align: left; font-size: 1em;">
-        <p style="margin-bottom: 10px;">${window.t('instructions_level1')}</p>
-        <p style="margin-bottom: 10px;">${window.t('instructions_level2')}</p>
-        <p style="margin-bottom: 10px;">${window.t('instructions_level3')}</p>
-        <p style="margin-bottom: 10px;">${window.t('instructions_level4')}</p>
+        <p style="margin-bottom: 10px;">• <strong>Nível 1:</strong> "Neste nível, identifique a <strong>COR</strong> da palavra exibida. Ignore o que está escrito."</p>
+        <p style="margin-bottom: 10px;">• <strong>Nível 2:</strong> "As opções de resposta agora são coloridas. Continue focando na <strong>COR</strong> da palavra central."</p>
+        <p style="margin-bottom: 10px;">• <strong>Nível 3:</strong> "As opções agora têm fundo colorido. Mantenha o foco na <strong>COR</strong> da palavra central, independente do fundo."</p>
+        <p style="margin-bottom: 10px;">• <strong>Nível 4:</strong> "Atenção: A <strong>1ª figura</strong> é crucial!
+            <br>&emsp;1. Memorize a <strong>FORMA</strong> e a <strong>COR</strong> dela.
+            <br>&emsp;2. Ao clicar no primeiro atributo, a figura ou a cor MUDARÁ.
+            <br>&emsp;3. <strong>IGNORE</strong> a nova figura e responda o segundo atributo da figura <strong>ANTERIOR</strong>."
+        </p>
     </div>
 `;
 
@@ -45,16 +49,8 @@ function showGameInstructions(onStartCallback) {
     const description = document.getElementById("level-description");
     const startButton = document.getElementById("start-level-btn");
 
-    title.textContent = window.t('instructions_title');
-    // Recarregar instruções para garantir idioma atual
-    description.innerHTML = `
-    <div style="text-align: left; font-size: 1em;">
-        <p style="margin-bottom: 10px;">${window.t('instructions_level1')}</p>
-        <p style="margin-bottom: 10px;">${window.t('instructions_level2')}</p>
-        <p style="margin-bottom: 10px;">${window.t('instructions_level3')}</p>
-        <p style="margin-bottom: 10px;">${window.t('instructions_level4')}</p>
-    </div>
-`;
+    title.textContent = "Instruções dos Níveis";
+    description.innerHTML = GAME_INSTRUCTIONS_HTML;
 
     // Remove previous event listeners
     const newButton = startButton.cloneNode(true);
@@ -81,7 +77,7 @@ function startCountdown(duration) {
         if (countdownTimer > 0) {
             countdownTimer--;
             totalGameTime++;
-            document.getElementById("countdown").textContent = `${window.t('time_label')}: ${countdownTimer} s`;
+            document.getElementById("countdown").textContent = `Tempo: ${countdownTimer} segundos`;
         } else {
             clearInterval(countdownInterval);
             document.querySelectorAll(".button").forEach(button => button.disabled = true);
@@ -121,7 +117,7 @@ function generateStroopText() {
     } else {
         currentColor = colors[Math.floor(Math.random() * colors.length)];
         currentText = colors[Math.floor(Math.random() * colors.length)];
-        document.getElementById("stroop-text").textContent = window.t(currentText);
+        document.getElementById("stroop-text").textContent = currentText;
         document.getElementById("stroop-text").style.color = colorMap[currentColor];
     }
 }
@@ -140,12 +136,12 @@ function checkAnswer(event) {
         reactionTimes.push({
             level: currentLevel,
             time: reactionTime,
-            correct: event.target.dataset.color === currentColor
+            correct: event.target.textContent === currentColor
         });
     }
 
-    const buttonColorKey = event.target.dataset.color; // Usar dataset.color (chave)
-    if (buttonColorKey === currentColor) {
+    const buttonColor = event.target.textContent;
+    if (buttonColor === currentColor) {
         correctCount += 1;
         displayFeedback('success');
         updateScore();
@@ -190,7 +186,7 @@ function resetGame(level = 1) {
     currentLevel = level;
     currentLevel = level;
     window.scrollTo(0, 0);
-    document.getElementById("current-level").textContent = window.t('level_label') + " " + currentLevel;
+    document.getElementById("current-level").textContent = "Nível: " + currentLevel;
     correctCount = 0;
     errorCount = 0;
     clearInterval(countdownInterval);
@@ -295,10 +291,10 @@ function atualizarIndicadorModo() {
     const modeIndicator = document.getElementById('current-mode');
     if (modeIndicator) {
         if (isTestMode) {
-            modeIndicator.textContent = window.t('mode_test');
+            modeIndicator.textContent = 'Modo: Teste';
             modeIndicator.classList.add('test-mode');
         } else {
-            modeIndicator.textContent = window.t('mode_game');
+            modeIndicator.textContent = 'Modo: Jogo';
             modeIndicator.classList.remove('test-mode');
         }
     }
@@ -362,9 +358,9 @@ document.getElementById("next-level-button").addEventListener("click", () => {
 
 const shapes = ["square", "circle", "triangle"];
 const shapesInPortuguese = {
-    "square": window.t('square'),
-    "circle": window.t('circle'),
-    "triangle": window.t('triangle')
+    "square": "Quadrado",
+    "circle": "Círculo",
+    "triangle": "Triângulo"
 };
 
 function saveSessionData() {
@@ -409,9 +405,9 @@ function showFinalResults() {
     let levelResults = '';
     for (let level in gameData.levels) {
         levelResults += `
-            <h3>${window.t('level_label')} ${level}</h3>
-            <p>${window.t('correct_label')}: ${gameData.levels[level].correctCount} / ${window.t('error_label')}: ${gameData.levels[level].errorCount}</p>
-            <p>${window.t('time_label')}: ${gameData.levels[level].totalGameTime} s</p>
+            <h3>Nível ${level}</h3>
+            <p>Respostas Corretas: ${gameData.levels[level].correctCount} / Erros: ${gameData.levels[level].errorCount}</p>
+            <p>Tempo: ${gameData.levels[level].totalGameTime} segundos</p>
         `;
     }
 
@@ -443,26 +439,26 @@ function showFinalResults() {
     resultsDiv.innerHTML = `
         <div class="results-container">
             <button class="close-button" onclick="closeResults()">×</button>
-            <h2>${window.t('results_title')}</h2>
+            <h2>Resultados Finais</h2>
 
             <div class="results-summary">
-                <h3>${window.t('results_summary')}</h3>
+                <h3>Resumo por Nível</h3>
                 ${levelResults}
             </div>
 
             <div class="results-total">
-                <h3>${window.t('results_total')}</h3>
-                <p><strong>${window.t('correct_label')}:</strong> ${gameData.correctCount}</p>
-                <p><strong>${window.t('error_label')}:</strong> ${gameData.errorCount}</p>
-                <p><strong>${window.t('total_time')}</strong> ${gameData.totalGameTime} s</p>
-                <p><strong>${window.t('total_average')}</strong> ${gameData.averageCorrect} ${window.t('per_second')}</p>
+                <h3>Total Geral</h3>
+                <p><strong>Respostas Corretas:</strong> ${gameData.correctCount}</p>
+                <p><strong>Erros:</strong> ${gameData.errorCount}</p>
+                <p><strong>Tempo Total:</strong> ${gameData.totalGameTime} segundos</p>
+                <p><strong>Média de Acertos:</strong> ${gameData.averageCorrect} por segundo</p>
             </div>
 
             ${diagnosticoHtml}
 
             <div class="buttons-row">
-                <button onclick="restartGame()">${window.t('play_again_button')}</button>
-                <button onclick="closeResults()" style="background-color: #2196F3;">${window.t('close_button')}</button>
+                <button onclick="restartGame()">Jogar Novamente</button>
+                <button onclick="closeResults()" style="background-color: #2196F3;">Fechar</button>
             </div>
         </div>
     `;

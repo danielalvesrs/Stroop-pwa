@@ -7,11 +7,10 @@
     <title>Stroop Game v3</title>
     <link rel="stylesheet" type="text/css" href="css/stroop.css?v15">
     <link rel="manifest" href="manifest.json">
-    <script src="js/i18n.js"></script>
 </head>
 
 <body>
-    <h1 class="gradient" data-i18n="app_title">Stroop</h1>
+    <h1 class="gradient">Stroop</h1>
     <div class="stroop-text" id="stroop-text">Stroop</div>
 
     <div class="container" aria-live="polite">
@@ -35,26 +34,25 @@
             <!-- Botões de cores de formas serão gerados dinamicamente -->
         </div>
         <div id="level4-instruction" class="instruction-box" style="display: none;">
-            <p data-i18n="level4_warning">Atenção! Ao selecionar uma forma ou cor, o estímulo visual pode mudar.
-                Lembre-se da forma e cor
+            <p>Atenção! Ao selecionar uma forma ou cor, o estímulo visual pode mudar. Lembre-se da forma e cor
                 originais!</p>
         </div>
         <div id="status-container">
             <div class="status-box">
                 <span id="countdown">Tempo: 0 segundos</span>
-                <label for="countdown" data-i18n="time_label">⏰ Tempo</label>
+                <label for="countdown">⏰ Tempo</label>
             </div>
             <div class="status-box">
                 <span id="correct-count">0</span>
-                <label for="correct-count" data-i18n="correct_label">✔ Acertos</label>
+                <label for="correct-count">✔ Acertos</label>
             </div>
             <div class="status-box">
                 <span id="error-count">0</span>
-                <label for="error-count" data-i18n="error_label">❌ Erros</label>
+                <label for="error-count">❌ Erros</label>
             </div>
             <div class="status-box">
                 <span id="average-score">0</span>
-                <label data-i18n="average_label">Média</label>
+                <label>Média</label>
             </div>
         </div>
 
@@ -67,12 +65,10 @@
         </div>
 
         <div id="button-container">
-            <button id="new-game-button" class="button-common another-class" data-i18n="new_game_button">Novo
-                Jogo</button>
-            <button id="next-level-button" class="button-common another-class" data-i18n="next_level_button">Próximo
-                Nível</button>
-            <a href="index.html" class="button-common" style="background-color: #2196F3; text-decoration: none;"
-                data-i18n="back_button">Voltar</a>
+            <button id="new-game-button" class="button-common another-class">Novo Jogo</button>
+            <button id="next-level-button" class="button-common another-class">Próximo Nível</button>
+            <a href="index.html" class="button-common"
+                style="background-color: #2196F3; text-decoration: none;">Voltar</a>
         </div>
     </div>
     <h3>Versão 5.5.9</h3>

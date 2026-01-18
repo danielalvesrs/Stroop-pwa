@@ -13,7 +13,6 @@ function startLevel4() {
     // Exibir a instrução do nível 4
     const instructionElement = document.getElementById("level4-instruction");
     if (instructionElement) {
-        instructionElement.innerHTML = window.t('level4_warning');
         instructionElement.style.display = "block";
     }
 
@@ -102,8 +101,7 @@ function generateLevel4ColorButtons() {
     colorOptions.forEach(color => {
         const button = document.createElement("button");
         button.className = "button"; // Reutilize a classe 'button' para estilos
-        button.textContent = window.t(color);
-        button.dataset.color = color;
+        button.textContent = color;
         button.style.backgroundColor = colorMap[color]; // Define a cor de fundo do botão
         button.onclick = function () {
             selectShapeColor(color);
@@ -169,8 +167,7 @@ function selectShapeName(name) {
 
 function selectShapeColor(color) {
     const buttons = document.getElementById("shape-color-button-container").getElementsByTagName("button");
-    // Find button by dataset.color because textContent is translated
-    const selectedButton = Array.from(buttons).find(button => button.dataset.color === color);
+    const selectedButton = Array.from(buttons).find(button => button.textContent === color);
     hideOtherColorButtons(selectedButton);
     selectedShapeColor = color;
 
