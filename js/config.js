@@ -5,9 +5,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const gameConfigSection = document.getElementById('game-config');
     const testConfigSection = document.getElementById('test-config');
     const saveConfigButton = document.getElementById('save-config');
+    const languageSelect = document.getElementById('language-select');
 
     // Carregar configurações salvas (se existirem)
     loadSavedConfig();
+
+    // Configurar seletor de idioma
+    if (languageSelect) {
+        languageSelect.value = window.i18n ? window.i18n.currentLang : 'pt-BR';
+        languageSelect.addEventListener('change', function () {
+            if (window.i18n) {
+                window.i18n.setLanguage(this.value);
+            }
+        });
+    }
 
     // Carregar informações de versão
     loadVersionInfo();

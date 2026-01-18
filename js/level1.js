@@ -24,9 +24,11 @@ function generateLevel1Buttons() {
             buttonColor = colors[Math.floor(Math.random() * colors.length)];
         } while (buttons.includes(buttonColor));
 
-        button.textContent = buttonColor;
+        const buttonKey = buttonColor; // buttonColor agora é a chave (ex: 'red')
+        button.textContent = window.t(buttonKey); // Traduz para exibir
+        button.dataset.color = buttonKey; // Guarda a chave para lógica
         button.style.color = "black"; // Específico para o Nível 1
-        buttons.push(buttonColor);
+        buttons.push(buttonKey);
         buttonContainer.appendChild(button);
         button.addEventListener("click", checkAnswer);
     }

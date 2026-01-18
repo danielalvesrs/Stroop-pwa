@@ -12,12 +12,25 @@
 
 <body>
     <header></header>
-    <h1>Configurações do Teste de Stroop</h1>
+    <h1 data-i18n="config_title">Configurações do Teste de Stroop</h1>
 
     <main>
         <div class="config-container">
             <section class="config-section">
-                <h2>Modo de Aplicação</h2>
+                <h2 data-i18n="language_label">Idioma</h2>
+                <div class="mode-selector"> <!-- Reusing class for styling compatibility -->
+                    <select id="language-select"
+                        style="padding: 10px; font-size: 1.1em; width: 100%; border-radius: 8px; border: 1px solid #ccc;">
+                        <option value="pt-BR">Português (BR)</option>
+                        <option value="en-US">English</option>
+                        <option value="fr-FR">Français</option>
+                        <option value="de-DE">Deutsch</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="config-section">
+                <h2 data-i18n="mode_game">Modo de Aplicação</h2>
                 <div class="mode-selector">
                     <div class="mode-option">
                         <input type="radio" id="game-mode" name="app-mode" value="game" checked>
@@ -126,12 +139,13 @@
             </section>
 
             <div class="buttons-container">
-                <button id="save-config" class="primary-button">Salvar Configurações</button>
-                <a href="index.html" class="secondary-button">Voltar</a>
+                <button id="save-config" class="primary-button" data-i18n="save_config">Salvar Configurações</button>
+                <a href="index.html" class="secondary-button" data-i18n="back_button">Voltar</a>
             </div>
         </div>
     </main>
 
+    <script src="js/i18n.js"></script>
     <script src="js/config.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
