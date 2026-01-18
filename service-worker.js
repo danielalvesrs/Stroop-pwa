@@ -1,4 +1,4 @@
-const CACHE_NAME = 'stroop-pwa-v13'; // Incrementado para forçar atualização
+const CACHE_NAME = 'stroop-pwa-v14'; // Incrementado para forçar atualização
 const INITIAL_CACHE = [
   './',
   './index.html',

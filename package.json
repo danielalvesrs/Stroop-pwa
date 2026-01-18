@@ -1,6 +1,6 @@
 {
   "name": "stroop-pwa",
-  "version": "1.0.0",
+  "version": "5.6.0",
   "module": "server.ts",
   "type": "module",
   "scripts": {
