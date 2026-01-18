@@ -11,6 +11,9 @@ function generateLevel2Buttons() {
     const buttonContainer = document.getElementById("button-container");
     buttonContainer.innerHTML = "";
     const buttons = [];
+    const colors = getColors();
+    const colorCssMap = getColorCssMap();
+
     for (let i = 0; i < colors.length; i++) {
         const button = document.createElement("button");
         button.className = "button";
@@ -20,7 +23,9 @@ function generateLevel2Buttons() {
         } while (buttons.includes(buttonColor));
 
         button.textContent = buttonColor;
-        button.style.color = colorMap[colors[Math.floor(Math.random() * colors.length)]]; // Específico para o Nível 2
+        // Random text color from CSS map
+        const randomColorName = colors[Math.floor(Math.random() * colors.length)];
+        button.style.color = colorCssMap[randomColorName]; // Específico para o Nível 2
         buttons.push(buttonColor);
         buttonContainer.appendChild(button);
         button.addEventListener("click", checkAnswer);

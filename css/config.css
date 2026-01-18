@@ -162,6 +162,36 @@ select {
     margin-top: 5px;
 }
 
+/* Language selector styles */
+.language-selector {
+    margin: 15px 0;
+}
+
+.language-selector select {
+    font-size: 1.1em;
+    padding: 12px 15px;
+    max-width: 350px;
+    cursor: pointer;
+    border: 2px solid #3498db;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.language-selector select:hover {
+    background-color: #e8f4fc;
+    border-color: #2980b9;
+}
+
+.language-selector select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+}
+
+#language-config {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e8f4fc 100%);
+    border: 1px solid #3498db;
+}
+
 .buttons-container {
     display: flex;
     justify-content: center;

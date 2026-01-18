@@ -5,12 +5,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const gameConfigSection = document.getElementById('game-config');
     const testConfigSection = document.getElementById('test-config');
     const saveConfigButton = document.getElementById('save-config');
+    const languageSelect = document.getElementById('language-select');
 
     // Carregar configurações salvas (se existirem)
     loadSavedConfig();
 
     // Carregar informações de versão
     loadVersionInfo();
+
+    // Initialize language selector
+    initLanguageSelector();
 
     // Event listeners para alternar entre modos
     gameModeRadio.addEventListener('change', function () {
@@ -34,6 +38,38 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('test-type-select').addEventListener('change', function () {
         updateTestTypeSettings(this.value);
     });
+
+    // Initialize language selector
+    function initLanguageSelector() {
+        // Set current language value
+        const currentLang = getCurrentLanguage();
+        languageSelect.value = currentLang;
+
+        // Add change listener
+        languageSelect.addEventListener('change', function () {
+            setLanguage(this.value);
+            // Update select option texts based on new language
+            updateSelectOptions();
+            // Re-apply translations to update version info labels
+            loadVersionInfo();
+        });
+    }
+
+    // Update select option texts with translations
+    function updateSelectOptions() {
+        // Test type select
+        const testTypeSelect = document.getElementById('test-type-select');
+        testTypeSelect.options[0].text = t('settings.standard');
+        testTypeSelect.options[1].text = t('settings.short');
+        testTypeSelect.options[2].text = t('settings.clinical');
+
+        // Difficulty select
+        const difficultySelect = document.getElementById('difficulty-select');
+        difficultySelect.options[0].text = t('settings.easy');
+        difficultySelect.options[1].text = t('settings.medium');
+        difficultySelect.options[2].text = t('settings.hard');
+        difficultySelect.options[3].text = t('settings.expert');
+    }
 
     // Função para carregar configurações salvas
     function loadSavedConfig() {
@@ -88,16 +124,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Função para carregar informações de versão
     function loadVersionInfo() {
-        const currentVersion = localStorage.getItem('versaoStroop') || 'Não disponível';
-        const lastUpdate = localStorage.getItem('ultimaAtualizacaoStroop') || 'Não disponível';
+        const currentVersion = localStorage.getItem('versaoStroop') || t('settings.notAvailable');
+        const lastUpdate = localStorage.getItem('ultimaAtualizacaoStroop') || t('settings.notAvailable');
         const versionHistory = JSON.parse(localStorage.getItem('historicoVersoesStroop') || '[]');
 
         // Atualizar informações de versão
-        document.getElementById('current-version').textContent = `Versão atual: ${currentVersion}`;
+        document.getElementById('current-version').innerHTML = `<span data-i18n="settings.currentVersion">${t('settings.currentVersion')}</span>: ${currentVersion}`;
 
         // Formatar data da última atualização
         let formattedDate = lastUpdate;
-        if (lastUpdate !== 'Não disponível') {
+        if (lastUpdate !== t('settings.notAvailable')) {
             try {
                 const date = new Date(lastUpdate);
                 formattedDate = date.toLocaleString();
@@ -105,20 +141,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Erro ao formatar data:', e);
             }
         }
-        document.getElementById('last-update').textContent = `Última atualização: ${formattedDate}`;
+        document.getElementById('last-update').innerHTML = `<span data-i18n="settings.lastUpdate">${t('settings.lastUpdate')}</span>: ${formattedDate}`;
 
         // Exibir histórico de versões
         const historyList = document.getElementById('version-history-list');
         if (versionHistory.length === 0) {
-            historyList.innerHTML = '<p>Nenhum histórico disponível.</p>';
+            historyList.innerHTML = `<p data-i18n="settings.noHistory">${t('settings.noHistory')}</p>`;
         } else {
             historyList.innerHTML = '';
             versionHistory.reverse().forEach(entry => {
                 const entryDate = new Date(entry.data).toLocaleString();
                 const tipoLabel = {
-                    'upgrade': 'Atualização',
-                    'downgrade': 'Downgrade',
-                    'instalação': 'Instalação'
+                    'upgrade': t('settings.upgrade'),
+                    'downgrade': t('settings.downgrade'),
+                    'instalação': t('settings.installation')
                 }[entry.tipo] || entry.tipo;
 
                 const entryElement = document.createElement('div');
@@ -162,7 +198,19 @@ document.addEventListener('DOMContentLoaded', function () {
         // Salvar no localStorage
         localStorage.setItem('stroopConfig', JSON.stringify(config));
 
-        // Feedback para o usuário
+        // Feedback para o usuário - show brief notification
+        const saveButton = document.getElementById('save-config');
+        const originalText = saveButton.textContent;
+        saveButton.textContent = '✓ ' + (getCurrentLanguage() === 'pt-BR' ? 'Salvo!' :
+            getCurrentLanguage() === 'en' ? 'Saved!' :
+                getCurrentLanguage() === 'fr' ? 'Enregistré!' : 'Gespeichert!');
+        saveButton.style.backgroundColor = '#27ae60';
+
+        setTimeout(() => {
+            saveButton.textContent = t('settings.saveSettings');
+            saveButton.style.backgroundColor = '';
+        }, 2000);
+
         console.log('Configurações salvas com sucesso!');
     }
 

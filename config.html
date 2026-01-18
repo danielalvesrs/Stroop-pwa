@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configurações - Teste de Stroop</title>
+    <title data-i18n="settings.title">Configurações - Teste de Stroop</title>
     <link rel="stylesheet" href="css/config.css">
     <link rel="stylesheet" href="css/intro.css">
     <link rel="manifest" href="manifest.json">
@@ -12,126 +12,150 @@
 
 <body>
     <header></header>
-    <h1>Configurações do Teste de Stroop</h1>
+    <h1 data-i18n="settings.title">Configurações do Teste de Stroop</h1>
 
     <main>
         <div class="config-container">
+            <!-- Language Section -->
+            <section class="config-section" id="language-config">
+                <h2 data-i18n="settings.language">Idioma / Language</h2>
+                <div class="language-selector">
+                    <select id="language-select">
+                        <option value="pt-BR">🇧🇷 Português (Brasil)</option>
+                        <option value="en">🇺🇸 English</option>
+                        <option value="fr">🇫🇷 Français</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                    </select>
+                </div>
+            </section>
+
             <section class="config-section">
-                <h2>Modo de Aplicação</h2>
+                <h2 data-i18n="settings.appMode">Modo de Aplicação</h2>
                 <div class="mode-selector">
                     <div class="mode-option">
                         <input type="radio" id="game-mode" name="app-mode" value="game" checked>
-                        <label for="game-mode">Jogo</label>
-                        <p class="mode-description">Modo de jogo para diversão e treinamento cognitivo.</p>
+                        <label for="game-mode" data-i18n="settings.game">Jogo</label>
+                        <p class="mode-description" data-i18n="settings.gameModeDesc">Modo de jogo para diversão e
+                            treinamento cognitivo.</p>
                     </div>
                     <div class="mode-option">
                         <input type="radio" id="test-mode" name="app-mode" value="test">
-                        <label for="test-mode">Teste</label>
-                        <p class="mode-description">Modo de teste para avaliação psicológica profissional.</p>
+                        <label for="test-mode" data-i18n="settings.test">Teste</label>
+                        <p class="mode-description" data-i18n="settings.testModeDesc">Modo de teste para avaliação
+                            psicológica profissional.</p>
                     </div>
                 </div>
             </section>
 
             <section class="config-section" id="test-config" style="display: none;">
-                <h2>Configurações do Teste</h2>
+                <h2 data-i18n="settings.testSettings">Configurações do Teste</h2>
 
                 <div class="test-type">
-                    <h3>Tipo de Teste</h3>
+                    <h3 data-i18n="settings.testType">Tipo de Teste</h3>
                     <select id="test-type-select">
-                        <option value="standard">Padrão (4 níveis)</option>
-                        <option value="short">Curto (2 níveis)</option>
-
-                        <option value="clinical">Clínico (Protocolo Específico)</option>
+                        <option value="standard" data-i18n="settings.standard">Padrão (4 níveis)</option>
+                        <option value="short" data-i18n="settings.short">Curto (2 níveis)</option>
+                        <option value="clinical" data-i18n="settings.clinical">Clínico (Protocolo Específico)</option>
                     </select>
                 </div>
 
                 <div class="time-settings">
-                    <h3>Configurações de Tempo</h3>
+                    <h3 data-i18n="settings.timeSettings">Configurações de Tempo</h3>
                     <div class="time-setting">
-                        <label for="level1-time">Tempo Nível 1 (segundos):</label>
+                        <label for="level1-time"><span data-i18n="settings.levelTime">Tempo Nível</span> 1 (<span
+                                data-i18n="game.seconds">segundos</span>):</label>
                         <input type="number" id="level1-time" min="10" max="120" value="17">
                     </div>
                     <div class="time-setting">
-                        <label for="level2-time">Tempo Nível 2 (segundos):</label>
+                        <label for="level2-time"><span data-i18n="settings.levelTime">Tempo Nível</span> 2 (<span
+                                data-i18n="game.seconds">segundos</span>):</label>
                         <input type="number" id="level2-time" min="10" max="120" value="17">
                     </div>
                     <div class="time-setting">
-                        <label for="level3-time">Tempo Nível 3 (segundos):</label>
+                        <label for="level3-time"><span data-i18n="settings.levelTime">Tempo Nível</span> 3 (<span
+                                data-i18n="game.seconds">segundos</span>):</label>
                         <input type="number" id="level3-time" min="10" max="120" value="17">
                     </div>
                     <div class="time-setting">
-                        <label for="level4-time">Tempo Nível 4 (segundos):</label>
+                        <label for="level4-time"><span data-i18n="settings.levelTime">Tempo Nível</span> 4 (<span
+                                data-i18n="game.seconds">segundos</span>):</label>
                         <input type="number" id="level4-time" min="10" max="120" value="17">
                     </div>
                 </div>
 
                 <div class="metrics-settings">
-                    <h3>Métricas de Análise</h3>
+                    <h3 data-i18n="settings.analysisMetrics">Métricas de Análise</h3>
                     <div class="metric-setting">
                         <input type="checkbox" id="metric-reaction-time" checked>
-                        <label for="metric-reaction-time">Tempo de Reação</label>
+                        <label for="metric-reaction-time" data-i18n="settings.reactionTime">Tempo de Reação</label>
                     </div>
                     <div class="metric-setting">
                         <input type="checkbox" id="metric-error-rate" checked>
-                        <label for="metric-error-rate">Taxa de Erro</label>
+                        <label for="metric-error-rate" data-i18n="settings.errorRate">Taxa de Erro</label>
                     </div>
                     <div class="metric-setting">
                         <input type="checkbox" id="metric-interference" checked>
-                        <label for="metric-interference">Índice de Interferência</label>
+                        <label for="metric-interference" data-i18n="settings.interferenceIndex">Índice de
+                            Interferência</label>
                     </div>
                     <div class="metric-setting">
                         <input type="checkbox" id="metric-learning-curve">
-                        <label for="metric-learning-curve">Curva de Aprendizado</label>
+                        <label for="metric-learning-curve" data-i18n="settings.learningCurve">Curva de
+                            Aprendizado</label>
                     </div>
                     <div class="metric-setting">
                         <input type="checkbox" id="metric-fatigue">
-                        <label for="metric-fatigue">Índice de Fadiga</label>
+                        <label for="metric-fatigue" data-i18n="settings.fatigueIndex">Índice de Fadiga</label>
                     </div>
                 </div>
             </section>
 
             <section class="config-section" id="game-config">
-                <h2>Configurações do Jogo</h2>
+                <h2 data-i18n="settings.gameSettings">Configurações do Jogo</h2>
                 <div class="difficulty-setting">
-                    <h3>Dificuldade</h3>
+                    <h3 data-i18n="settings.difficulty">Dificuldade</h3>
                     <select id="difficulty-select">
-                        <option value="easy">Fácil</option>
-                        <option value="medium" selected>Médio</option>
-                        <option value="hard">Difícil</option>
-                        <option value="expert">Especialista</option>
+                        <option value="easy" data-i18n="settings.easy">Fácil</option>
+                        <option value="medium" selected data-i18n="settings.medium">Médio</option>
+                        <option value="hard" data-i18n="settings.hard">Difícil</option>
+                        <option value="expert" data-i18n="settings.expert">Especialista</option>
                     </select>
                 </div>
                 <div class="sound-setting">
-                    <h3>Sons</h3>
+                    <h3 data-i18n="settings.sounds">Sons</h3>
                     <div class="setting-option">
                         <input type="checkbox" id="sound-enabled" checked>
-                        <label for="sound-enabled">Habilitar Sons</label>
+                        <label for="sound-enabled" data-i18n="settings.enableSounds">Habilitar Sons</label>
                     </div>
                 </div>
             </section>
 
             <section class="config-section" id="version-info">
-                <h2>Informações da Versão</h2>
+                <h2 data-i18n="settings.versionInfo">Informações da Versão</h2>
                 <div class="version-info">
-                    <p id="current-version">Versão atual: Carregando...</p>
-                    <p id="last-update">Última atualização: Carregando...</p>
+                    <p id="current-version"><span data-i18n="settings.currentVersion">Versão atual</span>: <span
+                            data-i18n="settings.loading">Carregando...</span></p>
+                    <p id="last-update"><span data-i18n="settings.lastUpdate">Última atualização</span>: <span
+                            data-i18n="settings.loading">Carregando...</span></p>
                 </div>
 
                 <div class="version-history">
-                    <h3>Histórico de Versões</h3>
+                    <h3 data-i18n="settings.versionHistory">Histórico de Versões</h3>
                     <div id="version-history-list">
-                        <p>Carregando histórico...</p>
+                        <p data-i18n="settings.loadingHistory">Carregando histórico...</p>
                     </div>
                 </div>
             </section>
 
             <div class="buttons-container">
-                <button id="save-config" class="primary-button">Salvar Configurações</button>
-                <a href="index.html" class="secondary-button">Voltar</a>
+                <button id="save-config" class="primary-button" data-i18n="settings.saveSettings">Salvar
+                    Configurações</button>
+                <a href="index.html" class="secondary-button" data-i18n="game.back">Voltar</a>
             </div>
         </div>
     </main>
 
+    <script src="js/i18n.js"></script>
     <script src="js/config.js"></script>
     <script>
         if ('serviceWorker' in navigator) {

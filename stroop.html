@@ -15,8 +15,8 @@
 
     <div class="container" aria-live="polite">
         <div class="status-header">
-            <div id="current-level" aria-label="Nível atual">Nível: 1</div>
-            <div id="current-mode" class="mode-indicator">Modo: Jogo</div>
+            <div id="current-level" aria-label="Nível atual" data-i18n-dynamic>Nível: 1</div>
+            <div id="current-mode" class="mode-indicator" data-i18n-dynamic>Modo: Jogo</div>
         </div>
         <div class="button-container" id="button-container" role="group" aria-label="Opções de cores">
             <!-- Botoes serão gerados dinamicamente -->
@@ -34,40 +34,42 @@
             <!-- Botões de cores de formas serão gerados dinamicamente -->
         </div>
         <div id="level4-instruction" class="instruction-box" style="display: none;">
-            <p>Atenção! Ao selecionar uma forma ou cor, o estímulo visual pode mudar. Lembre-se da forma e cor
+            <p data-i18n="instructions.level4Box">Atenção! Ao selecionar uma forma ou cor, o estímulo visual pode mudar.
+                Lembre-se da forma e cor
                 originais!</p>
         </div>
         <div id="status-container">
             <div class="status-box">
-                <span id="countdown">Tempo: 0 segundos</span>
-                <label for="countdown">⏰ Tempo</label>
+                <span id="countdown" data-i18n-dynamic>Tempo: 0 segundos</span>
+                <label for="countdown">⏰ <span data-i18n="game.time">Tempo</span></label>
             </div>
             <div class="status-box">
                 <span id="correct-count">0</span>
-                <label for="correct-count">✔ Acertos</label>
+                <label for="correct-count">✔ <span data-i18n="game.correct">Acertos</span></label>
             </div>
             <div class="status-box">
                 <span id="error-count">0</span>
-                <label for="error-count">❌ Erros</label>
+                <label for="error-count">❌ <span data-i18n="game.errors">Erros</span></label>
             </div>
             <div class="status-box">
                 <span id="average-score">0</span>
-                <label>Média</label>
+                <label data-i18n="game.average">Média</label>
             </div>
         </div>
 
         <div id="level-intro-modal" class="modal" style="display: none;">
             <div class="modal-content">
-                <h2 id="level-title">Nível 1</h2>
+                <h2 id="level-title" data-i18n-dynamic>Nível 1</h2>
                 <div id="level-description">Descrição do nível...</div>
-                <button id="start-level-btn" class="button-common">Começar</button>
+                <button id="start-level-btn" class="button-common" data-i18n="game.start">Começar</button>
             </div>
         </div>
 
         <div id="button-container">
-            <button id="new-game-button" class="button-common another-class">Novo Jogo</button>
-            <button id="next-level-button" class="button-common another-class">Próximo Nível</button>
-            <a href="index.html" class="button-common"
+            <button id="new-game-button" class="button-common another-class" data-i18n="game.newGame">Novo Jogo</button>
+            <button id="next-level-button" class="button-common another-class" data-i18n="game.nextLevel">Próximo
+                Nível</button>
+            <a href="index.html" class="button-common" data-i18n="game.back"
                 style="background-color: #2196F3; text-decoration: none;">Voltar</a>
         </div>
     </div>
@@ -84,6 +86,7 @@
     </audio>
 
     <!-- Incluindo os scripts comuns e específicos para cada nível -->
+    <script src="js/i18n.js"></script>
     <script src="js/common.js"></script>
     <script src="js/level1.js"></script>
     <script src="js/level2.js"></script>

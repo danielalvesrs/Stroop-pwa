@@ -24,21 +24,24 @@ function startLevel4() {
 
 function generateLevel4Stimulus() {
     const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    const randomColorKey = colorKeys[Math.floor(Math.random() * colorKeys.length)];
+    const randomColor = getColorName(randomColorKey);
 
     // Display shape
     const stroopTextElement = document.getElementById("stroop-text");
     stroopTextElement.textContent = ''; // Clear text
     stroopTextElement.className = 'stroop-text'; // Reset classes
     stroopTextElement.classList.add('shape-display', randomShape);
-    stroopTextElement.style.backgroundColor = colorMap[randomColor];
+    stroopTextElement.style.backgroundColor = colorMap[randomColorKey];
 
     // Salvar o estímulo original para verificação posterior
     originalShape = randomShape;
+    originalColorKey = randomColorKey;
     originalColor = randomColor;
 
     // Definir o estímulo atual
     currentShape = randomShape;
+    currentShapeColorKey = randomColorKey;
     currentShapeColor = randomColor;
 
     // Resetar seleções
@@ -55,8 +58,9 @@ function generateLevel4Stimulus() {
 function generateLevel4NameButtons() {
     const shapeNameButtonContainer = document.getElementById("shape-name-button-container");
     shapeNameButtonContainer.innerHTML = ""; // Clear previous buttons
-    const shapeNames = Object.values(shapesInPortuguese);
-    const correctShapeName = shapesInPortuguese[currentShape];
+    const shapesMap = getShapesInCurrentLanguage();
+    const shapeNames = Object.values(shapesMap);
+    const correctShapeName = shapesMap[currentShape];
     let nameOptions = [correctShapeName];
 
     while (nameOptions.length < 3) {
@@ -84,14 +88,15 @@ function generateLevel4NameButtons() {
 function generateLevel4ColorButtons() {
     const shapeColorButtonContainer = document.getElementById("shape-color-button-container");
     shapeColorButtonContainer.innerHTML = ""; // Clear previous buttons
-    const availableColors = [...colors];
+    const colors = getColors();
+    const colorCssMap = getColorCssMap();
     const correctColor = currentShapeColor;
     let colorOptions = [correctColor];
 
     while (colorOptions.length < 3) {
         let randomColor;
         do {
-            randomColor = availableColors[Math.floor(Math.random() * availableColors.length)];
+            randomColor = colors[Math.floor(Math.random() * colors.length)];
         } while (colorOptions.includes(randomColor));
         colorOptions.push(randomColor);
     }
@@ -102,7 +107,7 @@ function generateLevel4ColorButtons() {
         const button = document.createElement("button");
         button.className = "button"; // Reutilize a classe 'button' para estilos
         button.textContent = color;
-        button.style.backgroundColor = colorMap[color]; // Define a cor de fundo do botão
+        button.style.backgroundColor = colorCssMap[color]; // Define a cor de fundo do botão
         button.onclick = function () {
             selectShapeColor(color);
         };
@@ -149,17 +154,18 @@ function selectShapeName(name) {
     // Mudar a cor do estímulo quando a forma é selecionada
     if (!selectedShapeColor) { // Só muda se a cor ainda não foi selecionada
         // Escolher uma nova cor aleatória (diferente da atual)
-        let newColor;
+        let newColorKey;
         do {
-            newColor = colors[Math.floor(Math.random() * colors.length)];
-        } while (newColor === currentShapeColor);
+            newColorKey = colorKeys[Math.floor(Math.random() * colorKeys.length)];
+        } while (newColorKey === currentShapeColorKey);
 
         // Atualizar o estímulo visual com a nova cor
         const stroopTextElement = document.getElementById("stroop-text");
-        stroopTextElement.style.backgroundColor = colorMap[newColor];
+        stroopTextElement.style.backgroundColor = colorMap[newColorKey];
 
         // Atualizar a variável de cor atual
-        currentShapeColor = newColor;
+        currentShapeColorKey = newColorKey;
+        currentShapeColor = getColorName(newColorKey);
     }
 
     checkLevel4Answer();
@@ -192,12 +198,14 @@ function selectShapeColor(color) {
 }
 
 // Variáveis para armazenar o estímulo original
-let originalShape, originalColor;
+let originalShape, originalColor, originalColorKey;
+let currentShapeColorKey;
 
 function checkLevel4Answer() {
     if (selectedShapeName && selectedShapeColor) {
+        const shapesMap = getShapesInCurrentLanguage();
         // Verificar se as respostas correspondem ao estímulo original
-        const isCorrectShape = selectedShapeName === shapesInPortuguese[originalShape];
+        const isCorrectShape = selectedShapeName === shapesMap[originalShape];
         const isCorrectColor = selectedShapeColor === originalColor;
 
         if (isCorrectShape && isCorrectColor) {
@@ -220,10 +228,11 @@ function checkLevel4Answer() {
             const stroopTextElement = document.getElementById("stroop-text");
             stroopTextElement.className = 'stroop-text'; // Reset classes
             stroopTextElement.classList.add('shape-display', originalShape);
-            stroopTextElement.style.backgroundColor = colorMap[originalColor];
+            stroopTextElement.style.backgroundColor = colorMap[originalColorKey];
 
             // Restaurar as variáveis atuais
             currentShape = originalShape;
+            currentShapeColorKey = originalColorKey;
             currentShapeColor = originalColor;
 
             showAllButtons();

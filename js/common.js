@@ -1,16 +1,31 @@
-const colors = ["Vermelho", "Verde", "Azul", "Amarelo", "Laranja", "Púrpura"];
+// Color keys for translation
+const colorKeys = ["red", "green", "blue", "yellow", "orange", "purple"];
 const colorMap = {
-    "Vermelho": "red",
-    "Verde": "green",
-    "Azul": "blue",
-    "Amarelo": "yellow",
-    "Laranja": "orange",
-    "Púrpura": "purple"
+    "red": "red",
+    "green": "green",
+    "blue": "blue",
+    "yellow": "yellow",
+    "orange": "orange",
+    "purple": "purple"
 };
+
+// Get colors array from i18n (for backwards compatibility, we use a getter)
+function getColors() {
+    return colorKeys.map(key => getColorName(key));
+}
+
+// Get colorMap for CSS colors
+function getColorCssMap() {
+    const map = {};
+    colorKeys.forEach(key => {
+        map[getColorName(key)] = colorMap[key];
+    });
+    return map;
+}
 
 // Configurações padrão
 const DEFAULT_LEVEL_DURATION = 17;
-const LEVELS = { 1: "Nível: 1", 2: "Nível: 2", 3: "Nível: 3", 4: "Nível: 4" };
+const LEVELS = { 1: "1", 2: "2", 3: "3", 4: "4" };
 let currentColor, currentText;
 let currentLevel = 1;
 let correctCount = 0;
@@ -26,18 +41,20 @@ let appConfig = {};
 let lastStimulusTime = 0; // Variável para medir o tempo de reação
 
 
-const GAME_INSTRUCTIONS_HTML = `
+function getGameInstructionsHtml() {
+    return `
     <div style="text-align: left; font-size: 1em;">
-        <p style="margin-bottom: 10px;">• <strong>Nível 1:</strong> "Neste nível, identifique a <strong>COR</strong> da palavra exibida. Ignore o que está escrito."</p>
-        <p style="margin-bottom: 10px;">• <strong>Nível 2:</strong> "As opções de resposta agora são coloridas. Continue focando na <strong>COR</strong> da palavra central."</p>
-        <p style="margin-bottom: 10px;">• <strong>Nível 3:</strong> "As opções agora têm fundo colorido. Mantenha o foco na <strong>COR</strong> da palavra central, independente do fundo."</p>
-        <p style="margin-bottom: 10px;">• <strong>Nível 4:</strong> "Atenção: A <strong>1ª figura</strong> é crucial!
-            <br>&emsp;1. Memorize a <strong>FORMA</strong> e a <strong>COR</strong> dela.
-            <br>&emsp;2. Ao clicar no primeiro atributo, a figura ou a cor MUDARÁ.
-            <br>&emsp;3. <strong>IGNORE</strong> a nova figura e responda o segundo atributo da figura <strong>ANTERIOR</strong>."
+        <p style="margin-bottom: 10px;">• <strong>${t('game.level')} 1:</strong> "${t('instructions.level1')}"</p>
+        <p style="margin-bottom: 10px;">• <strong>${t('game.level')} 2:</strong> "${t('instructions.level2')}"</p>
+        <p style="margin-bottom: 10px;">• <strong>${t('game.level')} 3:</strong> "${t('instructions.level3')}"</p>
+        <p style="margin-bottom: 10px;">• <strong>${t('game.level')} 4:</strong> "${t('instructions.level4')}
+            <br>&emsp;1. ${t('instructions.level4_1')}
+            <br>&emsp;2. ${t('instructions.level4_2')}
+            <br>&emsp;3. ${t('instructions.level4_3')}"
         </p>
     </div>
 `;
+}
 
 function showGameInstructions(onStartCallback) {
     const modal = document.getElementById("level-intro-modal");
@@ -49,8 +66,8 @@ function showGameInstructions(onStartCallback) {
     const description = document.getElementById("level-description");
     const startButton = document.getElementById("start-level-btn");
 
-    title.textContent = "Instruções dos Níveis";
-    description.innerHTML = GAME_INSTRUCTIONS_HTML;
+    title.textContent = t('instructions.title');
+    description.innerHTML = getGameInstructionsHtml();
 
     // Remove previous event listeners
     const newButton = startButton.cloneNode(true);
@@ -72,12 +89,12 @@ function startCountdown(duration) {
 
     countdownTimer = levelDuration;
     totalGameTime = 0;
-    document.getElementById("countdown").textContent = `Tempo: ${countdownTimer} segundos`;
+    document.getElementById("countdown").textContent = `${t('game.time')}: ${countdownTimer} ${t('game.seconds')}`;
     countdownInterval = setInterval(() => {
         if (countdownTimer > 0) {
             countdownTimer--;
             totalGameTime++;
-            document.getElementById("countdown").textContent = `Tempo: ${countdownTimer} segundos`;
+            document.getElementById("countdown").textContent = `${t('game.time')}: ${countdownTimer} ${t('game.seconds')}`;
         } else {
             clearInterval(countdownInterval);
             document.querySelectorAll(".button").forEach(button => button.disabled = true);
@@ -99,26 +116,32 @@ function startCountdown(duration) {
 }
 
 function generateStroopText() {
+    const colors = getColors();
+    const colorCssMap = getColorCssMap();
+
     if (currentLevel === 4) {
         const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        const randomColorKey = colorKeys[Math.floor(Math.random() * colorKeys.length)];
+        const randomColor = getColorName(randomColorKey);
 
         // Display shape
         const stroopTextElement = document.getElementById("stroop-text");
         stroopTextElement.textContent = ''; // Clear text
         stroopTextElement.className = 'stroop-text'; // Reset classes
         stroopTextElement.classList.add('shape-display', randomShape);
-        stroopTextElement.style.backgroundColor = colorMap[randomColor];
+        stroopTextElement.style.backgroundColor = colorMap[randomColorKey];
 
         currentShape = randomShape;
         currentColor = randomColor;
 
 
     } else {
-        currentColor = colors[Math.floor(Math.random() * colors.length)];
-        currentText = colors[Math.floor(Math.random() * colors.length)];
+        const randomColorKey1 = colorKeys[Math.floor(Math.random() * colorKeys.length)];
+        const randomColorKey2 = colorKeys[Math.floor(Math.random() * colorKeys.length)];
+        currentColor = getColorName(randomColorKey1);
+        currentText = getColorName(randomColorKey2);
         document.getElementById("stroop-text").textContent = currentText;
-        document.getElementById("stroop-text").style.color = colorMap[currentColor];
+        document.getElementById("stroop-text").style.color = colorMap[randomColorKey1];
     }
 }
 
@@ -186,7 +209,7 @@ function resetGame(level = 1) {
     currentLevel = level;
     currentLevel = level;
     window.scrollTo(0, 0);
-    document.getElementById("current-level").textContent = "Nível: " + currentLevel;
+    document.getElementById("current-level").textContent = t('game.level') + ": " + currentLevel;
     correctCount = 0;
     errorCount = 0;
     clearInterval(countdownInterval);
@@ -257,12 +280,76 @@ document.addEventListener("DOMContentLoaded", () => {
     // Carregar configurações
     loadConfig();
 
+    // Apply translations to UI elements
+    applyGameTranslations();
+
     // Atualizar o indicador de modo
     atualizarIndicadorModo();
 
     // Iniciar o jogo
     startLevel1();
 });
+
+// Apply translations to game UI elements
+function applyGameTranslations() {
+    // Update level indicator
+    const levelIndicator = document.getElementById("current-level");
+    if (levelIndicator) {
+        levelIndicator.textContent = t('game.level') + ": " + currentLevel;
+    }
+
+    // Update button texts
+    const newGameBtn = document.getElementById("new-game-button");
+    if (newGameBtn) {
+        newGameBtn.textContent = t('game.newGame');
+    }
+
+    const nextLevelBtn = document.getElementById("next-level-button");
+    if (nextLevelBtn) {
+        nextLevelBtn.textContent = t('game.nextLevel');
+    }
+
+    const startLevelBtn = document.getElementById("start-level-btn");
+    if (startLevelBtn) {
+        startLevelBtn.textContent = t('game.start');
+    }
+
+    // Update status labels
+    const countdownLabel = document.querySelector('label[for="countdown"]');
+    if (countdownLabel) {
+        countdownLabel.innerHTML = `⏰ ${t('game.time')}`;
+    }
+
+    const correctLabel = document.querySelector('label[for="correct-count"]');
+    if (correctLabel) {
+        correctLabel.innerHTML = `✔ ${t('game.correct')}`;
+    }
+
+    const errorLabel = document.querySelector('label[for="error-count"]');
+    if (errorLabel) {
+        errorLabel.innerHTML = `❌ ${t('game.errors')}`;
+    }
+
+    const averageLabel = document.querySelector('.status-box:last-child label');
+    if (averageLabel) {
+        averageLabel.textContent = t('game.average');
+    }
+
+    // Update level 4 instruction box
+    const level4Instruction = document.getElementById("level4-instruction");
+    if (level4Instruction) {
+        const p = level4Instruction.querySelector('p');
+        if (p) {
+            p.textContent = t('instructions.level4Box');
+        }
+    }
+
+    // Update back link
+    const backLink = document.querySelector('a.button-common[href="index.html"]');
+    if (backLink) {
+        backLink.textContent = t('game.back');
+    }
+}
 
 // Função para registrar mudanças de versão
 function registrarMudancaVersao(versaoAtual, versaoAnterior, tipo) {
@@ -291,10 +378,10 @@ function atualizarIndicadorModo() {
     const modeIndicator = document.getElementById('current-mode');
     if (modeIndicator) {
         if (isTestMode) {
-            modeIndicator.textContent = 'Modo: Teste';
+            modeIndicator.textContent = t('game.modeTest');
             modeIndicator.classList.add('test-mode');
         } else {
-            modeIndicator.textContent = 'Modo: Jogo';
+            modeIndicator.textContent = t('game.modeGame');
             modeIndicator.classList.remove('test-mode');
         }
     }
@@ -357,11 +444,15 @@ document.getElementById("next-level-button").addEventListener("click", () => {
 
 
 const shapes = ["square", "circle", "triangle"];
-const shapesInPortuguese = {
-    "square": "Quadrado",
-    "circle": "Círculo",
-    "triangle": "Triângulo"
-};
+
+// Get shapes in current language
+function getShapesInCurrentLanguage() {
+    const shapesMap = {};
+    shapes.forEach(shape => {
+        shapesMap[shape] = getShapeName(shape);
+    });
+    return shapesMap;
+}
 
 function saveSessionData() {
     let gameData = JSON.parse(sessionStorage.getItem('stroopGameData')) || {
@@ -405,9 +496,9 @@ function showFinalResults() {
     let levelResults = '';
     for (let level in gameData.levels) {
         levelResults += `
-            <h3>Nível ${level}</h3>
-            <p>Respostas Corretas: ${gameData.levels[level].correctCount} / Erros: ${gameData.levels[level].errorCount}</p>
-            <p>Tempo: ${gameData.levels[level].totalGameTime} segundos</p>
+            <h3>${t('game.level')} ${level}</h3>
+            <p>${t('results.correctAnswers')}: ${gameData.levels[level].correctCount} / ${t('game.errors')}: ${gameData.levels[level].errorCount}</p>
+            <p>${t('game.time')}: ${gameData.levels[level].totalGameTime} ${t('game.seconds')}</p>
         `;
     }
 
@@ -417,19 +508,19 @@ function showFinalResults() {
         const diagnostico = gerarDiagnostico(gameData);
         diagnosticoHtml = `
             <div class="diagnostico-container">
-                <h3>Análise de Desempenho</h3>
-                <p class="diagnostico-descricao">Esta análise é baseada em dados psicológicos e deve ser interpretada por um profissional.</p>
+                <h3>${t('results.performanceAnalysis')}</h3>
+                <p class="diagnostico-descricao">${t('results.analysisDescription')}</p>
                 <div class="diagnostico-resultado">
-                    <p><strong>Índice de Interferência:</strong> ${diagnostico.indiceInterferencia}</p>
-                    <p><strong>Tempo de Reação Médio:</strong> ${diagnostico.tempoReacaoMedio} ms</p>
-                    <p><strong>Consistência de Resposta:</strong> ${diagnostico.consistenciaResposta}</p>
-                    <p><strong>Nível de Atenção Seletiva:</strong> ${diagnostico.nivelAtencaoSeletiva}</p>
+                    <p><strong>${t('results.interferenceIndex')}:</strong> ${diagnostico.indiceInterferencia}</p>
+                    <p><strong>${t('results.avgReactionTime')}:</strong> ${diagnostico.tempoReacaoMedio} ms</p>
+                    <p><strong>${t('results.responseConsistency')}:</strong> ${diagnostico.consistenciaResposta}</p>
+                    <p><strong>${t('results.selectiveAttention')}:</strong> ${diagnostico.nivelAtencaoSeletiva}</p>
                 </div>
                 <div class="diagnostico-interpretacao">
-                    <h4>Interpretação</h4>
+                    <h4>${t('results.interpretation')}</h4>
                     <p>${diagnostico.interpretacao}</p>
                 </div>
-                <p class="diagnostico-aviso">Nota: Esta análise é apenas uma referência e não substitui a avaliação de um profissional qualificado.</p>
+                <p class="diagnostico-aviso">${t('results.analysisNote')}</p>
             </div>
         `;
     }
@@ -439,26 +530,26 @@ function showFinalResults() {
     resultsDiv.innerHTML = `
         <div class="results-container">
             <button class="close-button" onclick="closeResults()">×</button>
-            <h2>Resultados Finais</h2>
+            <h2>${t('results.finalResults')}</h2>
 
             <div class="results-summary">
-                <h3>Resumo por Nível</h3>
+                <h3>${t('results.levelSummary')}</h3>
                 ${levelResults}
             </div>
 
             <div class="results-total">
-                <h3>Total Geral</h3>
-                <p><strong>Respostas Corretas:</strong> ${gameData.correctCount}</p>
-                <p><strong>Erros:</strong> ${gameData.errorCount}</p>
-                <p><strong>Tempo Total:</strong> ${gameData.totalGameTime} segundos</p>
-                <p><strong>Média de Acertos:</strong> ${gameData.averageCorrect} por segundo</p>
+                <h3>${t('results.totalGeneral')}</h3>
+                <p><strong>${t('results.correctAnswers')}:</strong> ${gameData.correctCount}</p>
+                <p><strong>${t('game.errors')}:</strong> ${gameData.errorCount}</p>
+                <p><strong>${t('results.totalTime')}:</strong> ${gameData.totalGameTime} ${t('game.seconds')}</p>
+                <p><strong>${t('results.averageHits')}:</strong> ${gameData.averageCorrect} ${t('results.perSecond')}</p>
             </div>
 
             ${diagnosticoHtml}
 
             <div class="buttons-row">
-                <button onclick="restartGame()">Jogar Novamente</button>
-                <button onclick="closeResults()" style="background-color: #2196F3;">Fechar</button>
+                <button onclick="restartGame()">${t('results.playAgain')}</button>
+                <button onclick="closeResults()" style="background-color: #2196F3;">${t('results.close')}</button>
             </div>
         </div>
     `;
@@ -485,7 +576,7 @@ function gerarDiagnostico(gameData) {
     const tempoReacaoMedio = Math.floor(Math.random() * 300 + 500) + ' ms';
 
     // Calcular consistência de resposta (baseada na variação de desempenho entre níveis)
-    let consistencia = 'Alta';
+    let consistencia = t('results.high');
     if (Object.keys(gameData.levels).length > 1) {
         const desempenhoNiveis = [];
         for (let level in gameData.levels) {
@@ -499,24 +590,24 @@ function gerarDiagnostico(gameData) {
         const variancia = desempenhoNiveis.reduce((a, b) => a + Math.pow(b - media, 2), 0) / desempenhoNiveis.length;
         const desvioPadrao = Math.sqrt(variancia);
 
-        if (desvioPadrao > 0.2) consistencia = 'Baixa';
-        else if (desvioPadrao > 0.1) consistencia = 'Média';
+        if (desvioPadrao > 0.2) consistencia = t('results.low');
+        else if (desvioPadrao > 0.1) consistencia = t('results.medium');
     }
 
     // Determinar nível de atenção seletiva
-    let nivelAtencao = 'Médio';
+    let nivelAtencao = t('results.medium');
     const taxaAcertoGeral = gameData.correctCount / (gameData.correctCount + gameData.errorCount);
-    if (taxaAcertoGeral > 0.85) nivelAtencao = 'Alto';
-    else if (taxaAcertoGeral < 0.6) nivelAtencao = 'Baixo';
+    if (taxaAcertoGeral > 0.85) nivelAtencao = t('results.high');
+    else if (taxaAcertoGeral < 0.6) nivelAtencao = t('results.low');
 
     // Gerar interpretação
     let interpretacao = '';
-    if (nivelAtencao === 'Alto' && consistencia === 'Alta') {
-        interpretacao = 'O desempenho indica excelente capacidade de atenção seletiva e controle inibitório. A pessoa demonstra habilidade consistente para ignorar informações irrelevantes e focar nas características relevantes do estímulo.';
-    } else if (nivelAtencao === 'Baixo') {
-        interpretacao = 'O desempenho sugere dificuldades na atenção seletiva e possível suscetibilidade à interferência cognitiva. Pode indicar necessidade de desenvolvimento de estratégias para melhorar o foco atencional e reduzir a distração por estímulos irrelevantes.';
+    if (nivelAtencao === t('results.high') && consistencia === t('results.high')) {
+        interpretacao = t('results.excellentPerformance');
+    } else if (nivelAtencao === t('results.low')) {
+        interpretacao = t('results.lowPerformance');
     } else {
-        interpretacao = 'O desempenho está dentro da faixa média esperada. Há um equilíbrio entre a capacidade de manter o foco e a suscetibilidade à interferência cognitiva. Com prática, é possível melhorar ainda mais estas habilidades.';
+        interpretacao = t('results.averagePerformance');
     }
 
     return {

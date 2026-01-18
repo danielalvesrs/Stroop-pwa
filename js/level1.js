@@ -14,6 +14,7 @@ function generateLevel1Buttons() {
     const buttonContainer = document.getElementById("button-container");
     buttonContainer.innerHTML = "";
     const buttons = [];
+    const colors = getColors();
 
     for (let i = 0; i < colors.length; i++) {
         const button = document.createElement("button");
