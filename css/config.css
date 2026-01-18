@@ -83,11 +83,13 @@ h3 {
     color: #666;
 }
 
-.time-settings, .metrics-settings {
+.time-settings,
+.metrics-settings {
     margin: 15px 0;
 }
 
-.time-setting, .metric-setting {
+.time-setting,
+.metric-setting {
     margin: 10px 0;
     display: flex;
     align-items: center;
@@ -110,12 +112,13 @@ h3 {
     .config-section {
         padding: 10px;
     }
-    
-    .time-setting, .metric-setting {
+
+    .time-setting,
+    .metric-setting {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .time-setting input {
         margin-top: 5px;
     }
@@ -125,19 +128,19 @@ h3 {
     body {
         padding: 10px;
     }
-    
+
     h1 {
         font-size: 1.5em;
     }
-    
+
     h2 {
         font-size: 1.3em;
     }
-    
+
     .mode-option {
         min-width: 200px;
     }
-    
+
     .config-container {
         padding: 10px;
     }
@@ -162,36 +165,6 @@ select {
     margin-top: 5px;
 }
 
-/* Language selector styles */
-.language-selector {
-    margin: 15px 0;
-}
-
-.language-selector select {
-    font-size: 1.1em;
-    padding: 12px 15px;
-    max-width: 350px;
-    cursor: pointer;
-    border: 2px solid #3498db;
-    background-color: #f8f9fa;
-    transition: all 0.3s ease;
-}
-
-.language-selector select:hover {
-    background-color: #e8f4fc;
-    border-color: #2980b9;
-}
-
-.language-selector select:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
-}
-
-#language-config {
-    background: linear-gradient(135deg, #f0f8ff 0%, #e8f4fc 100%);
-    border: 1px solid #3498db;
-}
-
 .buttons-container {
     display: flex;
     justify-content: center;
@@ -199,7 +172,8 @@ select {
     margin-top: 30px;
 }
 
-.primary-button, .secondary-button {
+.primary-button,
+.secondary-button {
     padding: 12px 24px;
     border: none;
     border-radius: 5px;
@@ -321,7 +295,8 @@ select {
         align-items: center;
     }
 
-    .primary-button, .secondary-button {
+    .primary-button,
+    .secondary-button {
         width: 100%;
         margin-bottom: 10px;
         text-align: center;
