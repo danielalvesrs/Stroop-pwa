@@ -240,6 +240,7 @@ class TranslationManager {
 
 // Inicializar globalmente
 const i18n = new TranslationManager();
+window.i18n = i18n; // Expor explicitamente para window
 
 // Atalho global para usar t('key')
 window.t = (key) => i18n.t(key);
