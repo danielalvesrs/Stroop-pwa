@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroop Game v3</title>
+    <link rel="stylesheet" type="text/css" href="css/stroop.css?v15">
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+    <h1 class="gradient">Stroop</h1>
+    <div class="stroop-text" id="stroop-text">Stroop</div>
+
+    <div class="container" aria-live="polite">
+        <div class="status-header">
+            <div id="current-level" aria-label="Nível atual">Nível: 1</div>
+            <div id="current-mode" class="mode-indicator">Modo: Jogo</div>
+        </div>
+        <div class="button-container" id="button-container" role="group" aria-label="Opções de cores">
+            <!-- Botoes serão gerados dinamicamente -->
+        </div>
+        <div class="shape-button-container" id="shape-button-container" role="group" aria-label="Opções de cores"
+            style="display: none;">
+            <!-- Botões de forma serão gerados dinamicamente -->
+        </div>
+        <div class="button-container" id="shape-name-button-container" role="group"
+            aria-label="Opções de nomes de formas" style="display: none;">
+            <!-- Botões de nomes de formas serão gerados dinamicamente -->
+        </div>
+        <div class="button-container" id="shape-color-button-container" role="group"
+            aria-label="Opções de cores de formas" style="display: none;">
+            <!-- Botões de cores de formas serão gerados dinamicamente -->
+        </div>
+        <div id="level4-instruction" class="instruction-box" style="display: none;">
+            <p>Atenção! Ao selecionar uma forma ou cor, o estímulo visual pode mudar. Lembre-se da forma e cor
+                originais!</p>
+        </div>
+        <div id="status-container">
+            <div class="status-box">
+                <span id="countdown">Tempo: 0 segundos</span>
+                <label for="countdown">⏰ Tempo</label>
+            </div>
+            <div class="status-box">
+                <span id="correct-count">0</span>
+                <label for="correct-count">✔ Acertos</label>
+            </div>
+            <div class="status-box">
+                <span id="error-count">0</span>
+                <label for="error-count">❌ Erros</label>
+            </div>
+            <div class="status-box">
+                <span id="average-score">0</span>
+                <label>Média</label>
+            </div>
+        </div>
+
+        <div id="level-intro-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2 id="level-title">Nível 1</h2>
+                <div id="level-description">Descrição do nível...</div>
+                <button id="start-level-btn" class="button-common">Começar</button>
+            </div>
+        </div>
+
+        <div id="button-container">
+            <button id="new-game-button" class="button-common another-class">Novo Jogo</button>
+            <button id="next-level-button" class="button-common another-class">Próximo Nível</button>
+            <a href="index.html" class="button-common"
+                style="background-color: #2196F3; text-decoration: none;">Voltar</a>
+        </div>
+    </div>
+    <h3>Versão 5.5.9</h3>
+    <!-- Elementos de áudio -->
+    <audio id="success-sound">
+        <source src="success_sound.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+
+    <audio id="error-sound">
+        <source src="error_sound.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+
+    <!-- Incluindo os scripts comuns e específicos para cada nível -->
+    <script src="js/common.js"></script>
+    <script src="js/level1.js"></script>
+    <script src="js/level2.js"></script>
+    <script src="js/level3.js"></script>
+    <script src="js/level4.js"></script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(() => console.log('Service Worker Registrado!'))
+                .catch((err) => console.log('Erro ao registrar Service Worker:', err));
+        }
+    </script>
+</body>
+
+</html>
