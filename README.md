@@ -2,6 +2,8 @@
 
 Jogo/PWA baseado no efeito Stroop, criado para treinar atenção, percepção e controle cognitivo em rodadas rápidas.
 
+Jogue pela web: [https://stroopapp.netlify.app/](https://stroopapp.netlify.app/)
+
 O projeto também é usado como base para o aplicativo publicado no Google Play.
 
 ## Sobre o projeto
