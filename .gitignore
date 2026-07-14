@@ -2,3 +2,15 @@ temp.txt
 level4.png
 nivel4.html
 /screenshots
+
+# Local secrets and Android signing files
+.env
+.env.*
+*.keystore
+*.jks
+*.p12
+*.pem
+*.key
+google-services.json
+service-account*.json
+credentials*.json
