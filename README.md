@@ -4,6 +4,8 @@ Jogo/PWA baseado no efeito Stroop, criado para treinar atenção, percepção e 
 
 Jogue pela web: [https://stroopapp.netlify.app/](https://stroopapp.netlify.app/)
 
+Disponível no Google Play: [Stroop](https://play.google.com/store/apps/details?id=app.netlify.stroopapp.twa)
+
 O projeto também é usado como base para o aplicativo publicado no Google Play.
 
 ## Sobre o projeto
@@ -72,3 +74,9 @@ Arquivos de assinatura, keystores, senhas e credenciais de publicação não dev
 ## Privacidade
 
 O app não deve coletar dados pessoais sem necessidade explícita. Mudanças que alterem comportamento de privacidade devem atualizar também a política em [privacy.html](privacy.html).
+
+## Outros Trabalhos
+
+Veja outros projetos em [github.com/danielalvesrs](https://github.com/danielalvesrs).
+
+- [suno-music-dna](https://github.com/danielalvesrs/suno-music-dna): ferramenta para transformar referências musicais em prompts e letras prontos para criação com IA.
