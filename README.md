@@ -51,6 +51,20 @@ Como o projeto é estático, também é possível servir a pasta com outro servi
 
 O app Android é gerado a partir do PWA usando Trusted Web Activity (TWA). Veja mais detalhes em [ANDROID_BUILD.md](ANDROID_BUILD.md).
 
+Na prática, a maior parte das mudanças neste repositório é entregue pelo PWA publicado em `https://stroopapp.netlify.app/`. Como o app Android usa TWA, mudanças em HTML, CSS, JavaScript, textos, lógica do jogo, service worker, manifesto PWA e assets web normalmente passam a aparecer no app depois do deploy do site.
+
+Algumas mudanças podem exigir gerar e enviar um novo `.aab` para o Google Play, especialmente quando envolverem:
+
+- package name / identificador Android;
+- assinatura, keystore ou configuração de publicação;
+- ícone, nome ou metadados nativos usados pela casca Android;
+- permissões Android;
+- configuração TWA/Bubblewrap/PWABuilder;
+- mudanças no vínculo de domínio, certificado ou `assetlinks.json`;
+- qualquer ajuste que dependa da casca Android e não apenas do PWA hospedado.
+
+Ao contribuir, informe no pull request se a mudança é apenas web/PWA ou se pode exigir nova publicação Android.
+
 Arquivos de assinatura, keystores, senhas e credenciais de publicação não devem ser adicionados a este repositório.
 
 ## Privacidade
