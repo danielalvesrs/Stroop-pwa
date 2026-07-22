@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Stroop</string>
+    <string name="title_activity_main">Stroop</string>
+    <string name="package_name">app.netlify.stroopapp.twa</string>
+    <string name="custom_url_scheme">app.netlify.stroopapp.twa</string>
+</resources>
