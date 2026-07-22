@@ -2,6 +2,7 @@ temp.txt
 level4.png
 nivel4.html
 /screenshots
+node_modules/
 
 # Local secrets and Android signing files
 .env
@@ -14,3 +15,8 @@ nivel4.html
 google-services.json
 service-account*.json
 credentials*.json
+
+# Generated Android web assets and build outputs
+www/
+artifacts/
+android/app/keystore/
